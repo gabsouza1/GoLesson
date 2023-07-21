@@ -9,5 +9,11 @@ namespace Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+
+        public int GeneroId { get; set; }
+        
+        public virtual Generos Generos { get; set; }
+
+        public virtual ICollection<UsuariosCursos> UsuariosCursos { get; set; }
     }
 }
