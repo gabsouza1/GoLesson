@@ -17,6 +17,8 @@ namespace Infra.Data
         { 
         }
 
+        public DbSet<Paises> Paises { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces;
+﻿using Domain.Entities;
+using Domain.Interfaces;
 using Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,14 +14,15 @@ namespace Infra.Repositories
     {
         private readonly DataContext _dataContext;
 
-        public Repository(DataContext dataContext) 
+        public Repository(DataContext dataContext)
         {
             _dataContext = dataContext;
         }
+
         public async Task Add(T entity)
         {
             await _dataContext.Set<T>().AddAsync(entity);
-            await _dataContext.SaveChangesAsync();
+            await _dataContext.SaveChangesAsync();  
         }
 
         public async Task Delete(T entity)
@@ -31,7 +33,7 @@ namespace Infra.Repositories
 
         public async Task<List<T>> GetAll()
         {
-            return await _dataContext.Set<T>().ToListAsync();
+           return await _dataContext.Set<T>().ToListAsync();
         }
 
         public async Task<T> GetById(int id)
