@@ -10,5 +10,7 @@ namespace Domain.Entities
     {
         public int Id { get; set; }
         public string NomePais { get; set; }
+
+        public virtual ICollection<Estados>Estados { get; set; }
     }
 }
