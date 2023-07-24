@@ -8,12 +8,12 @@ namespace Domain.Entities
     public class Cidades
     {
         public int Id { get; set; }
-        public string nome { get; set; }
+        public string Nome { get; set; }
        
 
-        public virtual Estados Estados { get; set; }
+        public virtual Estados? Estados { get; set; }
 
-        public virtual ICollection<CodigoPostal>CodigoPostal { get; set; }
+        public virtual ICollection<CodigoPostal>?CodigoPostal { get; set; }
 
     }
 }

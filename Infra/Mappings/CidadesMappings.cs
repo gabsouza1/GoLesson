@@ -10,14 +10,13 @@ using Domain.Entities;
 
 namespace Infra.Mappings
 {
-    public class CidadesMapping : IEntityTypeConfiguration<Estados>
+    public class CidadesMapping : IEntityTypeConfiguration<Cidades>
     {
         public void Configure(EntityTypeBuilder<Cidades> builder)
         {
             builder.ToTable("Cidades");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomeCidade).HasMaxLength(255).IsRequired();
-            
+            builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
         }
     }
 }

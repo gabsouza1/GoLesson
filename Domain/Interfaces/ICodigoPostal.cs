@@ -11,4 +11,4 @@ namespace Domain.Interfaces
     {
     }
 }
-}
+
