@@ -13,7 +13,7 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.ToTable("Paises");
+            builder.ToTable("Generos");
             builder.HasKey(p => p.Id);
             builder.HasOne(p => p.Generos).WithMany(x => x.User).HasForeignKey(x => x.GeneroId);
             builder.HasMany(p => p.UsuariosCursos).WithOne(x => x.User).HasForeignKey(x => x.UsuarioId);

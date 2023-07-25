@@ -17,7 +17,21 @@ namespace Infra.Data
         { 
         }
 
+        public DbSet<Arquivos> Arquivos { get; set; }
+        public DbSet<Aulas> Aulas { get; set; }
+        public DbSet<Cidades> Cidades { get; set; }
+        public DbSet<CodigoPostal> CodigoPostal { get; set; }
+        public DbSet<Cursos> Cursos { get; set; }
+        public DbSet<Enderecos> Enderecos { get; set; }
+        public DbSet<Estados> Estados { get; set; }
+        public DbSet<Generos> Generos { get; set; }
+        public DbSet<Modulos> Modulos { get; set; }
         public DbSet<Paises> Paises { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<UsuariosCursos> UsuariosCursos { get; set; }
+        
+       
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
