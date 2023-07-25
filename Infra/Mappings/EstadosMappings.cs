@@ -18,6 +18,7 @@ namespace Infra.Mappings
             builder.HasKey(p => p.Id);
             builder.Property(p => p.NomeEstado).HasMaxLength(255).IsRequired();
             builder.Property(p => p.UF).HasMaxLength(2).IsRequired();
+            builder.HasOne(p => p.Paises).WithMany(equals => e.Estados).HasForeignKey(fk => fk.PaisesId);
         }
     }
 }

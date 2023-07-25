@@ -10,6 +10,7 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string NomeEstado { get; set; }
         public string UF { get; set; }
+        public int PaisesId { get; set; }
 
         public virtual Paises? Paises { get; set; }
 

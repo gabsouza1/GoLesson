@@ -18,6 +18,8 @@ namespace Infra.Mappings
             builder.HasKey(p => p.Id);
             builder.Property(p => p.nome).HasMaxLength(255).IsRequired();
             builder.Property(p => p.numero).HasMaxLength(255).IsRequired();
+            builder.HasOne(es => es.Estado).WithMany(c => c.Enderecos).HasForeignKey(fk => fk.EnderecosId);
+
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Domain.Entities
         public decimal Valor { get; set; }
 
 
-        public virtual ICollection<UsuariosCursos> UsuariosCursos { get; set; }
-        public virtual ICollection<Modulos> Modulos { get; set; }
+        public virtual ICollection<UsuariosCursos>? UsuariosCursos { get; set; }
+        public virtual ICollection<Modulos>? Modulos { get; set; }
     }
 }

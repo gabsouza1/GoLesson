@@ -15,6 +15,7 @@ namespace Infra.Mappings
         {
             builder.ToTable("Cursos");
             builder.HasKey(p => p.Id);
+
         }
     }
 }

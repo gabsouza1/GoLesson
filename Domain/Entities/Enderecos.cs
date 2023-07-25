@@ -13,8 +13,8 @@ namespace Domain.Entities
         public int CodigoPostalId { get; set; }
         public int UsuarioId { get; set; }
 
-        public virtual CodigoPostal CodigoPostal { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public virtual CodigoPostal? CodigoPostal { get; set; }
+        public virtual Usuarios? Usuarios { get; set; }
 
     }
 }

@@ -17,6 +17,7 @@ namespace Infra.Mappings
             builder.ToTable("Cidades");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
+            builder.HasOne(c => c.Estados).WithMany(c => c.Cidade).HasForeignKey(fk => fk.EstadoId);
         }
     }
 }
