@@ -15,10 +15,8 @@ namespace Infra.Mappings
         public void Configure(EntityTypeBuilder<Estados> builder)
         {
             builder.ToTable("Estados");
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomeEstado).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.UF).HasMaxLength(2).IsRequired();
-            builder.HasOne(p => p.Paises).WithMany(equals => e.Estados).HasForeignKey(fk => fk.PaisesId);
+            builder.HasKey(e => e.Id);
+            builder.HasOne(e => e.Paises).WithMany(p => p.Estados).HasForeignKey(fk => fk.PaisesId);
         }
     }
 }

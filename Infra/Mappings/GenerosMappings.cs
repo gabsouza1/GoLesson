@@ -15,8 +15,6 @@ namespace Infra.Mappings
         {
             builder.ToTable("Generos");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomeGenero).HasMaxLength(255).IsRequired();
-
         }
     }
 }

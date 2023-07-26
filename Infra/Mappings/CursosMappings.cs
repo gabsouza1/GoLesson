@@ -15,12 +15,7 @@ namespace Infra.Mappings
         {
             builder.ToTable("Cursos");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomeCurso).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.Descricao).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.Valor).HasMaxLength(255).IsRequired();
-            builder.HasMany(cu => cu.UsuariosCursos).WithOne(c => c.Cursos).HasForeignKey(fk => fk.CursoId);
-
-
+            builder.HasMany(c => c.UsuariosCursos).WithOne(cu => cu.Cursos).HasForeignKey(fk => fk.CursoId);
         }
     }
 }

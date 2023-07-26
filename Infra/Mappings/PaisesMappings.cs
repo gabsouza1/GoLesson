@@ -17,7 +17,6 @@ namespace Infra.Mappings
         {
             builder.ToTable("Paises");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomePais).HasMaxLength(255).IsRequired();
         }
     }
 }

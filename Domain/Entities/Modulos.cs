@@ -13,6 +13,8 @@ namespace Domain.Entities
         public string Descricao { get; set; }
         public int AulaId { get; set; }
         public int CursoId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
 
 
 

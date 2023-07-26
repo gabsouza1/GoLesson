@@ -13,7 +13,8 @@ namespace Domain.Entities
         public DateTime DataCompra { get; set; }
         public int StatusPagamentoId { get; set; }
         public int FormaPagamentoId { get; set; }
-
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
 
         public virtual StatusPagamento? StatusPagamento { get; set; }
         public virtual FormasPagamentos? FormaPagamento { get; set; }

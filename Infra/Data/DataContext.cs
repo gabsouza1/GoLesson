@@ -19,15 +19,23 @@ namespace Infra.Data
 
         public DbSet<Arquivos> Arquivos { get; set; }
         public DbSet<Aulas> Aulas { get; set; }
+        public DbSet<AvaliacoesCursos> AvaliacoesCursos { get; set; }
+        public DbSet<Categorias> Categorias { get; set; }
         public DbSet<Cidades> Cidades { get; set; }
         public DbSet<CodigoPostal> CodigoPostal { get; set; }
+        public DbSet<Compras> Compras { get; set; }
         public DbSet<Cursos> Cursos { get; set; }
         public DbSet<Enderecos> Enderecos { get; set; }
         public DbSet<Estados> Estados { get; set; }
+        public DbSet<Favoritos> Favoritos { get; set; }
+        public DbSet<FormasPagamentos> FormasPagamentos { get; set; }
         public DbSet<Generos> Generos { get; set; }
         public DbSet<Modulos> Modulos { get; set; }
+        public DbSet<NotasAvaliacoes> NotasAvaliacoes { get; set; }
         public DbSet<Paises> Paises { get; set; }
+        public DbSet<StatusPagamento> StatusPagamentos { get; set; }
         public DbSet<UsuariosCursos> UsuariosCursos { get; set; }
+        public DbSet<UsuariosModulos> UsuariosModulos { get; set; }
         
        
 

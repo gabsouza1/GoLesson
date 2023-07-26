@@ -13,7 +13,8 @@ namespace Domain.Entities
         public string NomeAula { get; set; }
         public string Descricao { get; set; }
         public string Conteudo { get; set; }
-
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
         public virtual ICollection<Arquivos>? Arquivos { get; set; }
         public virtual ICollection<Modulos>? Modulos { get; set; }
     }

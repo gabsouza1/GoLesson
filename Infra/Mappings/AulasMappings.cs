@@ -15,11 +15,8 @@ namespace Infra.Mappings
         public void Configure(EntityTypeBuilder<Aulas> builder)
         {
             builder.ToTable("Aulas");
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.NomeAula).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.Descricao).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.Conteudo).HasMaxLength(255).IsRequired();
-            builder.HasMany(a => a.Modulos).WithOne(a => a.Aulas).HasForeignKey(x => x.AulaId);
+            builder.HasKey(a => a.Id);
+            builder.HasMany(a => a.Modulos).WithOne(m => m.Aulas).HasForeignKey(fk => fk.AulaId);
         }
     }
 }

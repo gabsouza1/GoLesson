@@ -13,13 +13,13 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<ApplicationUser> builder)
         {
-            builder.ToTable("Generos");
-            builder.HasKey(p => p.Id);
-            builder.HasOne(p => p.Generos).WithMany(x => x.User).HasForeignKey(x => x.GeneroId);
-            builder.HasMany(p => p.UsuariosCursos).WithOne(x => x.User).HasForeignKey(x => x.UsuarioId);
-            builder.Property(p => p.Foto).HasColumnName("Foto").HasColumnType("varchar").HasMaxLength(255);
-
-
+            builder.HasKey(a => a.Id);
+            builder.HasOne(a => a.Generos).WithMany(g => g.User).HasForeignKey(fk => fk.GeneroId);
+            builder.HasMany(a => a.UsuariosCursos).WithOne(uc => uc.User).HasForeignKey(fk => fk.UsuarioId);
+            builder.HasMany(a => a.Favoritos).WithOne(f => f.Usuarios).HasForeignKey(fk => fk.UsuarioId);
+            builder.HasMany(a => a.Avaliacoes).WithOne(ac => ac.Usuarios).HasForeignKey(fk => fk.UsuarioId);
+            builder.HasMany(a => a.Enderecos).WithOne(e => e.Usuarios).HasForeignKey(fk => fk.UsuarioId);
+            builder.HasMany(a => a.NotasAvaliacoes).WithOne(na => na.Usuarios).HasForeignKey(fk => fk.UsuarioId);
         }
     }
 }

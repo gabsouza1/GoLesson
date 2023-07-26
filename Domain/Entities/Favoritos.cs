@@ -10,8 +10,10 @@ namespace Domain.Entities
     {
         public int UsuarioId { get; set; }
         public int CursoId { get; set; }
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? LastUpdatedAt { get; set; }
 
-        public virtual ApplicationUser? Usuario { get; set; }
+        public virtual ApplicationUser? Usuarios { get; set; }
         public virtual Cursos? Cursos { get; set; }
     }
 }
