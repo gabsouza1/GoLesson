@@ -19,7 +19,7 @@ namespace Infra.Mappings
             builder.Property(p => p.NomeAula).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Descricao).HasMaxLength(255).IsRequired();
             builder.Property(p => p.Conteudo).HasMaxLength(255).IsRequired();
-            builder.HasOne(c => c.Modulos).WithMany(c => c.Aulas).HasForeignKey(fk => fk.ModulosId);
+            builder.HasMany(a => a.Modulos).WithOne(a => a.Aulas).HasForeignKey(x => x.AulaId);
         }
     }
 }

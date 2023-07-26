@@ -27,7 +27,6 @@ namespace Infra.Data
         public DbSet<Generos> Generos { get; set; }
         public DbSet<Modulos> Modulos { get; set; }
         public DbSet<Paises> Paises { get; set; }
-        public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<UsuariosCursos> UsuariosCursos { get; set; }
         
        

@@ -17,5 +17,6 @@ namespace Domain.Entities
 
         public virtual ICollection<UsuariosCursos>? UsuariosCursos { get; set; }
         public virtual ICollection<Modulos>? Modulos { get; set; }
+        public virtual ICollection<Favoritos>? Favoritos { get; set; }
     }
 }

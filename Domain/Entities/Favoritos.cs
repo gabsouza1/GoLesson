@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Modulos
+    public class Favoritos
     {
-        public int Id { get; set; }
-        public string Titulo { get; set; }
-        public string Descricao { get; set; }
-        public int AulaId { get; set; }
+        public int UsuarioId { get; set; }
         public int CursoId { get; set; }
 
-
-
-        public virtual Aulas? Aulas { get; set; }
+        public virtual ApplicationUser? Usuario { get; set; }
         public virtual Cursos? Cursos { get; set; }
     }
 }

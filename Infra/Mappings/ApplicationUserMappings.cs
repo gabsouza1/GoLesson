@@ -17,6 +17,9 @@ namespace Infra.Mappings
             builder.HasKey(p => p.Id);
             builder.HasOne(p => p.Generos).WithMany(x => x.User).HasForeignKey(x => x.GeneroId);
             builder.HasMany(p => p.UsuariosCursos).WithOne(x => x.User).HasForeignKey(x => x.UsuarioId);
+            builder.Property(p => p.Foto).HasColumnName("Foto").HasColumnType("varchar").HasMaxLength(255);
+
+
         }
     }
 }

@@ -16,9 +16,9 @@ namespace Infra.Mappings
         {
             builder.ToTable("Enderecos");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.nome).HasMaxLength(255).IsRequired();
-            builder.Property(p => p.numero).HasMaxLength(255).IsRequired();
-            builder.HasOne(es => es.Estado).WithMany(c => c.Enderecos).HasForeignKey(fk => fk.EnderecosId);
+            builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
+            builder.Property(p => p.Numero).HasMaxLength(255).IsRequired();
+            builder.HasOne(es => es.CodigoPostal).WithMany(c => c.Enderecos).HasForeignKey(fk => fk.CodigoPostalId);
 
         }
     }

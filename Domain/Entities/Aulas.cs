@@ -15,6 +15,6 @@ namespace Domain.Entities
         public string Conteudo { get; set; }
 
         public virtual ICollection<Arquivos>? Arquivos { get; set; }
-        public virtual Modulos? Modulos { get; set; }
+        public virtual ICollection<Modulos>? Modulos { get; set; }
     }
 }

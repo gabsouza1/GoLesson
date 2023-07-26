@@ -16,9 +16,9 @@ namespace Infra.Mappings
         {
             builder.ToTable("Arquivos");
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.Nome).HasMaxLength(255).IsRequired();
+            builder.Property(p => p.NomeArquivo).HasMaxLength(255).IsRequired();
             builder.Property(p => p.MIME).HasMaxLength(50).IsRequired();
-            builder.HasOne(c => c.Cursos).WithMany(c => c.Arquivos).HasForeignKey(fk => fk.CursosId);
+            builder.HasOne(c => c.Aulas).WithMany(c => c.Arquivos).HasForeignKey(fk => fk.AulaId);
         }
     }
 }
