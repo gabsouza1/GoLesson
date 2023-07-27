@@ -13,10 +13,10 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<UsuarioModulo> builder)
         {
+            builder.ToTable("UsuariosModulos");
             builder.HasKey(um => new { um.UsuarioId, um.ModuloId });
             builder.HasOne(um => um.Usuario).WithMany(u => u.UsuarioModulos).HasForeignKey(um => um.UsuarioId);
             builder.HasOne(um => um.Modulos).WithMany(m => m.UsuariosModulos).HasForeignKey(um => um.ModuloId);
-            // Configurações adicionais para a entidade UsuariosModulos, se houver
         }
     }
 

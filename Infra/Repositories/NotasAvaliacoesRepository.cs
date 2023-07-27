@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class NotasAvaliacoesRepository : Repository<NotasAvaliacoes>
+    public class NotasAvaliacoesRepository : Repository<NotaAvaliacao>
     {
         public NotasAvaliacoesRepository(DataContext dataContext) : base(dataContext)
         {

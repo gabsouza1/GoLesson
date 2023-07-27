@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class EnderecosRepository : Repository<Enderecos>
+    public class EnderecosRepository : Repository<Endereco>
     {
         public EnderecosRepository(DataContext dataContext) : base(dataContext)
         {

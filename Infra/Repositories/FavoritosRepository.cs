@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class FavoritosRepository : Repository<Favoritos>
+    public class FavoritosRepository : Repository<Favorito>
     {
         public FavoritosRepository(DataContext dataContext) : base(dataContext)
         {

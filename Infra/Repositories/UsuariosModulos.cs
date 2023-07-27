@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class UsuariosModulosRepository : Repository<UsuariosModulos>
+    public class UsuariosModulosRepository : Repository<UsuarioModulo>
     {
         public UsuariosModulosRepository(DataContext dataContext) : base(dataContext)
         {

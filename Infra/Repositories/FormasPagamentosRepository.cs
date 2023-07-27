@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class FormasPagamentosRepository : Repository<FormasPagamentos>
+    public class FormasPagamentosRepository : Repository<FormaPagamento>
     {
         public FormasPagamentosRepository(DataContext dataContext) : base(dataContext)
         {

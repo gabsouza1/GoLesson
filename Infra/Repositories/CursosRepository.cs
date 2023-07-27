@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class CursosRepository : Repository<Cursos>
+    public class CursosRepository : Repository<Curso>
     {
         public CursosRepository(DataContext dataContext) : base(dataContext)
         {
