@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IEnderecos : IRepository<Enderecos>
+    public interface IEnderecos : IRepository<Endereco>
     {
     }
 }

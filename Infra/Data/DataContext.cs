@@ -17,25 +17,25 @@ namespace Infra.Data
         { 
         }
 
-        public DbSet<Arquivos> Arquivos { get; set; }
-        public DbSet<Aulas> Aulas { get; set; }
-        public DbSet<AvaliacoesCursos> AvaliacoesCursos { get; set; }
-        public DbSet<Categorias> Categorias { get; set; }
-        public DbSet<Cidades> Cidades { get; set; }
+        public DbSet<Arquivo> Arquivos { get; set; }
+        public DbSet<Aula> Aulas { get; set; }
+        public DbSet<AvaliacaoCurso> AvaliacoesCursos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Cidade> Cidades { get; set; }
         public DbSet<CodigoPostal> CodigoPostal { get; set; }
-        public DbSet<Compras> Compras { get; set; }
-        public DbSet<Cursos> Cursos { get; set; }
-        public DbSet<Enderecos> Enderecos { get; set; }
-        public DbSet<Estados> Estados { get; set; }
-        public DbSet<Favoritos> Favoritos { get; set; }
-        public DbSet<FormasPagamentos> FormasPagamentos { get; set; }
-        public DbSet<Generos> Generos { get; set; }
-        public DbSet<Modulos> Modulos { get; set; }
-        public DbSet<NotasAvaliacoes> NotasAvaliacoes { get; set; }
-        public DbSet<Paises> Paises { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
+        public DbSet<Estado> Estados { get; set; }
+        public DbSet<Favorito> Favoritos { get; set; }
+        public DbSet<FormaPagamento> FormasPagamentos { get; set; }
+        public DbSet<Genero> Generos { get; set; }
+        public DbSet<Modulo> Modulos { get; set; }
+        public DbSet<NotaAvaliacao> NotasAvaliacoes { get; set; }
+        public DbSet<Pais> Paises { get; set; }
         public DbSet<StatusPagamento> StatusPagamentos { get; set; }
-        public DbSet<UsuariosCursos> UsuariosCursos { get; set; }
-        public DbSet<UsuariosModulos> UsuariosModulos { get; set; }
+        public DbSet<UsuarioCurso> UsuariosCursos { get; set; }
+        public DbSet<UsuarioModulo> UsuariosModulos { get; set; }
         
        
 

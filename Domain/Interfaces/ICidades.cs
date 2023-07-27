@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface ICidades : IRepository<Cidades>
+    public interface ICidades : IRepository<Cidade>
     {
     }
 }

@@ -12,9 +12,9 @@ namespace Domain.Entities
         public string Bairro { get; set; }
         public int CidadeId { get; set; }
 
-        public virtual Cidades? Cidades { get; set; }
+        public virtual Cidade? Cidades { get; set; }
 
-        public virtual ICollection<Enderecos>? Enderecos { get; set; }
+        public virtual ICollection<Endereco>? Enderecos { get; set; }
 
     }
 }

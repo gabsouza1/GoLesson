@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface ICategorias : IRepository<Categorias>
+    public interface ICategorias : IRepository<Categoria>
     {
     }
 }

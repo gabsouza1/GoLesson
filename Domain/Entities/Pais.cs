@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class StatusPagamento
+    public class Pais
     {
         public int Id { get; set; }
-        public string NomeStatusPagamento { get; set; }
-        public virtual ICollection<Compra>? Compras { get; set; }
+        public string NomePais { get; set; }
+
+        public virtual ICollection<Estado>? Estados { get; set; }
     }
 }

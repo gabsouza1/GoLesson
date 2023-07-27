@@ -15,11 +15,13 @@ namespace Domain.Entities
         public bool Ativo { get; set; }
         public DateTime? CreatedAt { get; set; } 
         public DateTime? LastUpdatedAt { get; set; } 
-        public virtual Generos? Generos { get; set; }
-        public virtual ICollection<UsuariosCursos>? UsuariosCursos { get; set; }
-        public virtual ICollection<Favoritos>? Favoritos { get; set; }
-        public virtual ICollection<AvaliacoesCursos>? Avaliacoes { get; set;}
-        public virtual ICollection<Enderecos>? Enderecos { get; set; }
-        public virtual ICollection<NotasAvaliacoes>? NotasAvaliacoes { get; set; }
+        public virtual Genero? Generos { get; set; }
+        public virtual ICollection<UsuarioCurso>? UsuariosCursos { get; set; }
+        public virtual ICollection<UsuarioModulo> UsuarioModulos { get; set; }
+        public virtual ICollection<Favorito>? Favoritos { get; set; }
+        public virtual ICollection<AvaliacaoCurso>? AvaliacoesCursos { get; set;}
+        public virtual ICollection<Endereco>? Enderecos { get; set; }
+        public virtual ICollection<NotaAvaliacao>? NotasAvaliacoes { get; set; }
+        public virtual ICollection<Compra> Compras { get; set; }
     }
 }
