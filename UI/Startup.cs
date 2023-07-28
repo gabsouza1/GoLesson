@@ -2,6 +2,7 @@
 using Infra.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UI.Configurations;
 using UI.Data;
 
 namespace UI
@@ -17,16 +18,16 @@ namespace UI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configuração do DbContext
+            services.AddIdentityConfiguration(Configuration);
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            // Configuração do Identity
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
             services.AddControllersWithViews();
+            services.AddAutoMapperConfiguration();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

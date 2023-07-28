@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Data
 {
-    public class DataContext : IdentityDbContext<ApplicationUser>
+    public class DataContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     { 
         public DataContext()
         {

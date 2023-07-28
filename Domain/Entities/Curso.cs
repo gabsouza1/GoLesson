@@ -13,8 +13,8 @@ namespace Domain.Entities
         public string Descricao { get; set; }
         public int CategoriaId { get; set; }
         public decimal Valor { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? LastUpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Categoria? Categorias { get; set; }
         public virtual ICollection<UsuarioCurso>? UsuariosCursos { get; set; }
         public virtual ICollection<Modulo>? Modulos { get; set; }

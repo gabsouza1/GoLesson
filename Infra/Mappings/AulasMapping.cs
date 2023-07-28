@@ -16,7 +16,7 @@ namespace Infra.Mappings
         {
             builder.ToTable("Aulas");
             builder.HasKey(a => a.Id);
-            builder.HasOne(a => a.Modulos).WithMany(m => m.Aulas).HasForeignKey(a => a.ModuloId);
+            builder.HasOne(a => a.Modulos).WithMany(m => m.Aulas).HasForeignKey(a => a.ModuloId).OnDelete(DeleteBehavior.NoAction);
             builder.HasOne(a => a.Cursos).WithMany(c => c.Aulas).HasForeignKey(a => a.CursoId);
         }
     }

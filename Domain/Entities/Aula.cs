@@ -14,8 +14,8 @@ namespace Domain.Entities
         public string NomeAula { get; set; }
         public string Descricao { get; set; }
         public string Conteudo { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? LastUpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Modulo? Modulos { get; set; }
         public virtual Curso? Cursos { get; set; }
         public virtual ICollection<Arquivo>? Arquivos { get; set; }

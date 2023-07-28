@@ -1,1 +1,2 @@
 dotnet ef migrations add InitialCreate -c DataContext -p C:\Users\Gabriel\Documents\GoLesson\GoLesson\Infra -o C:\Users\Gabriel\Documents\GoLesson\GoLesson\Infra\Migrations
+dotnet ef database update

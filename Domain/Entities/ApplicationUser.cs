@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser<int>
     {
-        private int id;
-
-        public int Id { get => id; set => id = value; }
         public int GeneroId { get; set; }
         public string? Foto { get; set; }
         public bool Ativo { get; set; }
-        public DateTime? CreatedAt { get; set; } 
-        public DateTime? LastUpdatedAt { get; set; } 
+        public DateTime? CreatedAt { get; set; } = DateTime.Now;
+        public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Genero? Generos { get; set; }
         public virtual ICollection<UsuarioCurso>? UsuariosCursos { get; set; }
         public virtual ICollection<UsuarioModulo>? UsuarioModulos { get; set; }
