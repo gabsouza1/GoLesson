@@ -22,7 +22,9 @@ namespace UI
             services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole<int>>()
+            services.AddDefaultIdentity<IdentityUser>(options => {
+                options.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 

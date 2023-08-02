@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IArquivos : IRepository<Arquivo>
+    public interface IArquivoRepository : IRepository<Arquivo>
     {
     }
 }

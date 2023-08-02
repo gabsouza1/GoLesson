@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace UI.Configurations
 {
-    public static class IdentiyConfig
+    public static class IdentityConfig
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
             IConfiguration configuration)

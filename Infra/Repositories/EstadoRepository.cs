@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Interfaces;
 using Infra.Data;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class EstadoRepository : Repository<Estado>
+    public class EstadoRepository : Repository<Estado>, IEstadoRepository
     {
         public EstadoRepository(DataContext dataContext) : base(dataContext)
         {

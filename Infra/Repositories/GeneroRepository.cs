@@ -1,4 +1,5 @@
 using Domain.Entities;
+using Domain.Interfaces;
 using Infra.Data;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class GeneroRepository : Repository<Genero>
+    public class GeneroRepository : Repository<Genero>, IGeneroRepository
     {
         public GeneroRepository(DataContext dataContext) : base(dataContext)
         {

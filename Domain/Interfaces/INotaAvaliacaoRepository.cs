@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    internal interface IFavorito : IRepository<Favorito>
+    public interface INotaAvaliacaoRepository : IRepository<NotaAvaliacao>
     {
     }
 }

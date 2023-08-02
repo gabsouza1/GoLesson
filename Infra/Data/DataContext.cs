@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Data
 {
-    public class DataContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
+    public class DataContext : IdentityDbContext<IdentityUser>
     { 
         public DataContext()
         {

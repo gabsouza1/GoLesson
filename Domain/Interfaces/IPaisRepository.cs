@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    internal interface IFormaPagamento : IRepository<FormaPagamento>
-    {
+    public interface IPaisRepository : IRepository<Pais>
+    { 
     }
 }
