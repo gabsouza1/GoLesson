@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Application.Apps
 {
-    public class AvaliacaoCursoApp : App<AvaliacaoCursoViewModel, AvaliacaoCurso>, IAvaliacaoCursopp
+    public class AvaliacaoCursoApp : App<AvaliacaoCursoViewModel, AvaliacaoCurso>, IAvaliacaoCursoApp
     {
         private readonly IAvaliacaoCursoRepository _avaliacaoCursoRepository;
 

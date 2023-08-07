@@ -1,4 +1,4 @@
-using Application.ViewModels;
+﻿using Application.ViewModels;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IAulaApp : IApp<ArquivoViewModel, Arquivo>
+    public interface IApplicationUserApp : IApp<UsuarioViewModel, ApplicationUser>
     {
-
     }
 }

@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Apps;
+using Application.Interfaces;
+using Domain.Entities;
 using Domain.Interfaces;
 using Infra.Data;
 using Infra.Repositories;
@@ -12,30 +14,49 @@ namespace UI.Configurations
         public static IServiceCollection ResolveDependencies(this IServiceCollection services) 
         {
             //DbContext
-            services.AddSingleton<DataContext>();
+            services.AddScoped<DataContext>();
 
+            //Applicações
+            services.AddTransient<IArquivoApp, ArquivoApp>();
+            services.AddTransient<IAulaApp, AulaApp>();
+            services.AddTransient<IAvaliacaoCursoApp, AvaliacaoCursoApp>();
+            services.AddTransient<ICategoriaApp, CategoriaApp>();
+            services.AddTransient<ICidadeApp, CidadeApp>();
+            services.AddTransient<ICodigoPostalApp, CodigoPostalApp>();
+            services.AddTransient<ICompraApp, CompraApp>();
+            services.AddTransient<ICursoApp, CursoApp>();
+            services.AddTransient<IEnderecoApp, EnderecoApp>();
+            services.AddTransient<IFavoritoApp, FavoritoApp>();
+            services.AddTransient<IFormaPagamentoApp, FormaPagamentoApp>();
+            services.AddTransient<IGeneroApp, GeneroApp>();
+            services.AddTransient<IModuloApp, ModuloApp>();
+            services.AddTransient<INotaAvaliacaoApp, NotaAvaliacaoApp>();
+            services.AddTransient<IPaisApp, PaisApp>();
+            services.AddTransient<IStatusPagamentoApp, StatusPagamentoApp>();
+            services.AddTransient<IUsuarioCursoApp, UsuarioCursoApp>();
+            services.AddTransient<IUsuarioModuloApp, UsuarioModuloApp>();
 
 
             //Repositorios
-            services.AddSingleton<IApplicationUserRepository, ApplicationUserRepository>();
-            services.AddSingleton<IArquivoRepository, ArquivoRepository>();
-            services.AddSingleton<IAulaRepository, AulaRepository>();
-            services.AddSingleton<IAvaliacaoCursoRepository, AvaliacaoCursoRepository>();
-            services.AddSingleton<ICategoriaRepository, CategoriaRepository>();
-            services.AddSingleton<ICidadeRepository, CidadeRepository>();
-            services.AddSingleton<ICodigoPostalRepository, CodigoPostalRepository>();
-            services.AddSingleton<ICompraRepository, CompraRepository>();
-            services.AddSingleton<ICursoRepository, CursoRepository>();
-            services.AddSingleton<IEnderecoRepsitory, EnderecoRepository>();
-            services.AddSingleton<IFavoritoRepository, FavoritoRepository>();
-            services.AddSingleton<IFormaPagamentoRepository, FormaPagamentoRepository>();
-            services.AddSingleton<IGeneroRepository, GeneroRepository>();
-            services.AddSingleton<IModuloRepository, ModuloRepository>();
-            services.AddSingleton<INotaAvaliacaoRepository, NotaAvaliacaoRepository>();
-            services.AddSingleton<IPaisRepository, PaisRepository>();
-            services.AddSingleton<IStatusPagamentoRepository, StatusPagamentoRepository>();
-            services.AddSingleton<IUsuarioCursoRepository, UsuarioCursoRepository>();
-            services.AddSingleton<IUsuarioModuloRepository, UsuarioModuloRepository>();
+            services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
+            services.AddTransient<IArquivoRepository, ArquivoRepository>();
+            services.AddTransient<IAulaRepository, AulaRepository>();
+            services.AddTransient<IAvaliacaoCursoRepository, AvaliacaoCursoRepository>();
+            services.AddTransient<ICategoriaRepository, CategoriaRepository>();
+            services.AddTransient<ICidadeRepository, CidadeRepository>();
+            services.AddTransient<ICodigoPostalRepository, CodigoPostalRepository>();
+            services.AddTransient<ICompraRepository, CompraRepository>();
+            services.AddTransient<ICursoRepository, CursoRepository>();
+            services.AddTransient<IEnderecoRepsitory, EnderecoRepository>();
+            services.AddTransient<IFavoritoRepository, FavoritoRepository>();
+            services.AddTransient<IFormaPagamentoRepository, FormaPagamentoRepository>();
+            services.AddTransient<IGeneroRepository, GeneroRepository>();
+            services.AddTransient<IModuloRepository, ModuloRepository>();
+            services.AddTransient<INotaAvaliacaoRepository, NotaAvaliacaoRepository>();
+            services.AddTransient<IPaisRepository, PaisRepository>();
+            services.AddTransient<IStatusPagamentoRepository, StatusPagamentoRepository>();
+            services.AddTransient<IUsuarioCursoRepository, UsuarioCursoRepository>();
+            services.AddTransient<IUsuarioModuloRepository, UsuarioModuloRepository>();
             return services;
         }
     }
