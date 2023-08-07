@@ -15,9 +15,9 @@ namespace Application.Apps
 {
     public class EnderecoApp : App<EnderecoViewModel, Endereco>, IEnderecoApp
     {
-        private readonly IEnderecoRepository _enderecoRepository;
+        private readonly IEnderecoRepsitory _enderecoRepository;
 
-        public EnderecoApp(IEnderecoRepository enderecoRepository, IMapper mapper
+        public EnderecoApp(IEnderecoRepsitory enderecoRepository, IMapper mapper
             , ILogger<EnderecoApp> logger) : base(enderecoRepository, mapper, logger)
         {
         }

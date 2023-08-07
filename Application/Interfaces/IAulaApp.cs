@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IAulaApp : IApp<ArquivoViewModel, Arquivo>
+    public interface IAulaApp : IApp<AulaViewModel, Aula>
     {
 
     }

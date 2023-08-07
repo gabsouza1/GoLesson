@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.ViewModels
 {
-    public class StatusPagementoViewModel
+    public class StatusPagamentoViewModel
     {
     }
 }

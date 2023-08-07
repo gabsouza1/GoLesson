@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Application.Apps
 {
-    public class NotaAvaliacaoApp : App<ArquivoViewModel, NotaAvaliacao>, INotaAvaliacaoApp
+    public class NotaAvaliacaoApp : App<NotaAvaliacaoViewModel, NotaAvaliacao>, INotaAvaliacaoApp
     {
         private readonly INotaAvaliacaoRepository _notaAvaliacaoRepository;
 
