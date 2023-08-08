@@ -8,5 +8,7 @@ namespace Application.ViewModels
 {
     public class GeneroViewModel
     {
+        public int Id { get; set; }
+        public string NomeGenero { get; set; }
     }
 }

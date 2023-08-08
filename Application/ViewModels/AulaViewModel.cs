@@ -8,5 +8,10 @@ namespace Application.ViewModels
 {
     public class AulaViewModel
     {
+        public int Id { get; set; }
+        public string NomeAula { get; set; }    
+        public string Descricao { get; set; }
+        public string Conteudo { get; set; }
+
     }
 }
