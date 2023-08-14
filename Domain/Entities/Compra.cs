@@ -15,7 +15,7 @@ namespace Domain.Entities
         public int FormaPagamentoId { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastUpdatedAt { get; set; }
-        public virtual ApplicationUser? Usuarios { get; set; }
+        public virtual Usuario? Usuarios { get; set; }
         public virtual StatusPagamento? StatusPagamento { get; set; }
         public virtual FormaPagamento? FormaPagamento { get; set; }
 

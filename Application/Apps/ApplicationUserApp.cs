@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Application.Apps
 {
-    public class ApplicationUserApp : App<UsuarioViewModel, ApplicationUser>, IApplicationUserApp
+    public class ApplicationUserApp : App<UsuarioViewModel, Usuario>, IApplicationUserApp
     {
         private readonly IApplicationUserRepository _applicationUserRepository;
 

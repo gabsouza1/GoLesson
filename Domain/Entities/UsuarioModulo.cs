@@ -12,7 +12,7 @@ namespace Domain.Entities
         public int ModuloId { get; set; }
         public decimal NotaMedia { get; set; }
 
-        public virtual ApplicationUser? Usuario { get; set; }
+        public virtual Usuario? Usuario { get; set; }
         public virtual Modulo? Modulos { get; set; }
     }
 }

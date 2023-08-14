@@ -15,7 +15,7 @@ namespace Domain.Entities
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastUpdatedAt { get; set; }
 
-        public virtual ApplicationUser? Usuarios { get; set; }
+        public virtual Usuario? Usuarios { get; set; }
         public virtual Curso? Cursos { get; set; }
     }
 }

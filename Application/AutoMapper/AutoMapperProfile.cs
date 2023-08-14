@@ -8,7 +8,7 @@ namespace Application.AutoMapper
     {
         public AutoMapperProfile()
         {
-            CreateMap<ApplicationUser, UsuarioViewModel>().ReverseMap();
+            CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
             CreateMap<Arquivo, ArquivoViewModel>().ReverseMap();
             CreateMap<Aula, AulaViewModel>().ReverseMap();
             CreateMap<AvaliacaoCurso, AvaliacaoCursoViewModel>().ReverseMap();

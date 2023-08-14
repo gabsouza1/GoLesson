@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Data
 {
-    public class DataContext : IdentityDbContext<IdentityUser>
+    public class DataContext : IdentityDbContext<Usuario, IdentityRole<int>, int>
     { 
         public DataContext()
         {
@@ -15,7 +15,8 @@ namespace Infra.Data
         }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
-        { 
+        {
+            //ChangeTracker.AutoDetectChangesEnabled = true;
         }
 
         public DbSet<Arquivo> Arquivos { get; set; }
@@ -46,6 +47,26 @@ namespace Infra.Data
             base.OnModelCreating(builder);
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+        {
+            foreach (var entry in ChangeTracker.Entries()
+                .Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Property("CreatedAt").CurrentValue = DateTime.Now;
+                }
+
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Property("CreatedAt").IsModified = false;
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
         }
 
 

@@ -10,9 +10,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Mappings
 {
-    public class AppliactionUserMapping : IEntityTypeConfiguration<ApplicationUser>
+    public class AppliactionUserMapping : IEntityTypeConfiguration<Usuario>
     {
-        public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+        public void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder.ToTable("Usuarios");
             builder.HasKey(a => a.Id);

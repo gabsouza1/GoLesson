@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
+    public class ApplicationUserRepository : Repository<Usuario>, IApplicationUserRepository
     {
         public ApplicationUserRepository(DataContext dataContext) : base(dataContext)
         {

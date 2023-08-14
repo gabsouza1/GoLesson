@@ -11,7 +11,7 @@ namespace Domain.Entities
         public int UsuarioId { get; set; }
         public int CursoId { get; set; }
 
-        public virtual ApplicationUser? User { get; set; }
+        public virtual Usuario? User { get; set; }
         public virtual Curso? Cursos { get; set; }
     }
 }

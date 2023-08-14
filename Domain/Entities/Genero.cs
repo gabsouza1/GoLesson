@@ -11,6 +11,6 @@ namespace Domain.Entities
         public int Id { get; set; }
         public string NomeGenero { get; set; }
 
-        public virtual ICollection<ApplicationUser>? User { get; set; }
+        public virtual ICollection<Usuario>? User { get; set; }
     }
 }

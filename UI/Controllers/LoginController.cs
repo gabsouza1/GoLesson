@@ -6,8 +6,8 @@ namespace UI.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        public LoginController(UserManager<IdentityUser> userManager)
+        private readonly UserManager<Usuario> _userManager;
+        public LoginController(UserManager<Usuario> userManager)
         {
             _userManager = userManager;
         }

@@ -12,7 +12,7 @@ namespace Domain.Entities
         public string Numero { get; set; }
         public int CodigoPostalId { get; set; }
         public int UsuarioId { get; set; }
-        public virtual ApplicationUser? Usuarios { get; set; }
+        public virtual Usuario? Usuarios { get; set; }
         public virtual CodigoPostal? CodigoPostal { get; set; }
 
     }

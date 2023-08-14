@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class ApplicationUser : IdentityUser<int>
+    public class Usuario : IdentityUser<int>
     {
         public int GeneroId { get; set; }
         public string? Foto { get; set; }
