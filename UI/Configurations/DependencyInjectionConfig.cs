@@ -17,46 +17,46 @@ namespace UI.Configurations
             services.AddScoped<DataContext>();
 
             //Applicações
-            services.AddTransient<IArquivoApp, ArquivoApp>();
-            services.AddTransient<IAulaApp, AulaApp>();
-            services.AddTransient<IAvaliacaoCursoApp, AvaliacaoCursoApp>();
-            services.AddTransient<ICategoriaApp, CategoriaApp>();
-            services.AddTransient<ICidadeApp, CidadeApp>();
-            services.AddTransient<ICodigoPostalApp, CodigoPostalApp>();
-            services.AddTransient<ICompraApp, CompraApp>();
-            services.AddTransient<ICursoApp, CursoApp>();
-            services.AddTransient<IEnderecoApp, EnderecoApp>();
-            services.AddTransient<IFavoritoApp, FavoritoApp>();
-            services.AddTransient<IFormaPagamentoApp, FormaPagamentoApp>();
-            services.AddTransient<IGeneroApp, GeneroApp>();
-            services.AddTransient<IModuloApp, ModuloApp>();
-            services.AddTransient<INotaAvaliacaoApp, NotaAvaliacaoApp>();
-            services.AddTransient<IPaisApp, PaisApp>();
-            services.AddTransient<IStatusPagamentoApp, StatusPagamentoApp>();
-            services.AddTransient<IUsuarioCursoApp, UsuarioCursoApp>();
-            services.AddTransient<IUsuarioModuloApp, UsuarioModuloApp>();
+            services.AddScoped<IArquivoApp, ArquivoApp>();
+            services.AddScoped<IAulaApp, AulaApp>();
+            services.AddScoped<IAvaliacaoCursoApp, AvaliacaoCursoApp>();
+            services.AddScoped<ICategoriaApp, CategoriaApp>();
+            services.AddScoped<ICidadeApp, CidadeApp>();
+            services.AddScoped<ICodigoPostalApp, CodigoPostalApp>();
+            services.AddScoped<ICompraApp, CompraApp>();
+            services.AddScoped<ICursoApp, CursoApp>();
+            services.AddScoped<IEnderecoApp, EnderecoApp>();
+            services.AddScoped<IFavoritoApp, FavoritoApp>();
+            services.AddScoped<IFormaPagamentoApp, FormaPagamentoApp>();
+            services.AddScoped<IGeneroApp, GeneroApp>();
+            services.AddScoped<IModuloApp, ModuloApp>();
+            services.AddScoped<INotaAvaliacaoApp, NotaAvaliacaoApp>();
+            services.AddScoped<IPaisApp, PaisApp>();
+            services.AddScoped<IStatusPagamentoApp, StatusPagamentoApp>();
+            services.AddScoped<IUsuarioCursoApp, UsuarioCursoApp>();
+            services.AddScoped<IUsuarioModuloApp, UsuarioModuloApp>();
 
 
             //Repositorios
-            services.AddTransient<IApplicationUserRepository, ApplicationUserRepository>();
-            services.AddTransient<IArquivoRepository, ArquivoRepository>();
-            services.AddTransient<IAulaRepository, AulaRepository>();
-            services.AddTransient<IAvaliacaoCursoRepository, AvaliacaoCursoRepository>();
-            services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-            services.AddTransient<ICidadeRepository, CidadeRepository>();
-            services.AddTransient<ICodigoPostalRepository, CodigoPostalRepository>();
-            services.AddTransient<ICompraRepository, CompraRepository>();
-            services.AddTransient<ICursoRepository, CursoRepository>();
-            services.AddTransient<IEnderecoRepsitory, EnderecoRepository>();
-            services.AddTransient<IFavoritoRepository, FavoritoRepository>();
-            services.AddTransient<IFormaPagamentoRepository, FormaPagamentoRepository>();
-            services.AddTransient<IGeneroRepository, GeneroRepository>();
-            services.AddTransient<IModuloRepository, ModuloRepository>();
-            services.AddTransient<INotaAvaliacaoRepository, NotaAvaliacaoRepository>();
-            services.AddTransient<IPaisRepository, PaisRepository>();
-            services.AddTransient<IStatusPagamentoRepository, StatusPagamentoRepository>();
-            services.AddTransient<IUsuarioCursoRepository, UsuarioCursoRepository>();
-            services.AddTransient<IUsuarioModuloRepository, UsuarioModuloRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IArquivoRepository, ArquivoRepository>();
+            services.AddScoped<IAulaRepository, AulaRepository>();
+            services.AddScoped<IAvaliacaoCursoRepository, AvaliacaoCursoRepository>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<ICidadeRepository, CidadeRepository>();
+            services.AddScoped<ICodigoPostalRepository, CodigoPostalRepository>();
+            services.AddScoped<ICompraRepository, CompraRepository>();
+            services.AddScoped<ICursoRepository, CursoRepository>();
+            services.AddScoped<IEnderecoRepsitory, EnderecoRepository>();
+            services.AddScoped<IFavoritoRepository, FavoritoRepository>();
+            services.AddScoped<IFormaPagamentoRepository, FormaPagamentoRepository>();
+            services.AddScoped<IGeneroRepository, GeneroRepository>();
+            services.AddScoped<IModuloRepository, ModuloRepository>();
+            services.AddScoped<INotaAvaliacaoRepository, NotaAvaliacaoRepository>();
+            services.AddScoped<IPaisRepository, PaisRepository>();
+            services.AddScoped<IStatusPagamentoRepository, StatusPagamentoRepository>();
+            services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>();
+            services.AddScoped<IUsuarioModuloRepository, UsuarioModuloRepository>();
             return services;
         }
     }

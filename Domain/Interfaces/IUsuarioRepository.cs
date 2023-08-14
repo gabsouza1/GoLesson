@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces
 {
-    public interface IApplicationUserRepository : IRepository<Usuario>
+    public interface IUsuarioRepository : IRepository<Usuario>
     {
     }
 }

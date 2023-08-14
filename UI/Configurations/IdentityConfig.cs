@@ -20,7 +20,7 @@ namespace UI.Configurations
             });
 
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer("Data Source=DESKTOP-KU3D3B1;Initial Catalog=GoLesson;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=true;")
+                options.UseSqlServer(configuration.GetConnectionString("Data Source=DESKTOP-KU3D3B1;Initial Catalog=GoLesson;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=true;"))
             );
             services.AddIdentity<Usuario, IdentityRole<int>>(options =>
             {
@@ -43,6 +43,7 @@ namespace UI.Configurations
             )
                     .AddRoleManager<RoleManager<IdentityRole<int>>>()
                     .AddEntityFrameworkStores<DataContext>()
+                    .AddDefaultTokenProviders()
                     .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>();
             return services;
         }

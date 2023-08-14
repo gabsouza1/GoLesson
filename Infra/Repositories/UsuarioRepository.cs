@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositories
 {
-    public class ApplicationUserRepository : Repository<Usuario>, IApplicationUserRepository
+    public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
-        public ApplicationUserRepository(DataContext dataContext) : base(dataContext)
+        public UsuarioRepository(DataContext dataContext) : base(dataContext)
         {
 
         }
