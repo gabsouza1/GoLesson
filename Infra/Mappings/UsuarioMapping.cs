@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Infra.Mappings
 {
-    public class AppliactionUserMapping : IEntityTypeConfiguration<Usuario>
+    public class UsuarioMapping : IEntityTypeConfiguration<Usuario>
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {

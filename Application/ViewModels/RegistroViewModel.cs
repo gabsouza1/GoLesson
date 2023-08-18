@@ -14,7 +14,15 @@ namespace Application.ViewModels
         public string Email { get; set; }
 
         [Required]
+        [Compare(nameof(Email), ErrorMessage = "Os endereços de e-mail não correspondem.")]
+        public string ConfirmarEmail { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        [Compare(nameof(Senha), ErrorMessage = "As senhas não correspondem")]
+        public string ConfirmarSenha { get; set; }
     }
 }
