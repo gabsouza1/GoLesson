@@ -19,35 +19,11 @@ namespace UI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(
-                options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            );
-            services.AddDefaultIdentity<Usuario>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequiredLength = 8;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireLowercase = false;
-                options.Password.RequiredUniqueChars = 1;
-                //User Settings
-                options.User.RequireUniqueEmail = true;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                //Sign In settings
-                options.SignIn.RequireConfirmedAccount = true;
-
-                //Lockout Settings
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(60);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-            }
-           )
-                   .AddRoles<IdentityRole<int>>()
-                   .AddEntityFrameworkStores<DataContext>()
-                   .AddDefaultTokenProviders();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddAutoMapperConfiguration();
             services.AddControllersWithViews();
+            services.AddIdentityConfiguration(Configuration);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -75,6 +51,17 @@ namespace UI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "registro",
+                    pattern: "registro",
+                    defaults: new { controller = "Registro", action = "Registrar" });
+
+                endpoints.MapControllerRoute(
+                    name: "login",
+                    pattern: "login",
+                    defaults: new { controller = "Login", action = "Login" });
+
             });
         }
     }

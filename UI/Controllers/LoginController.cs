@@ -8,10 +8,8 @@ namespace UI.Controllers
     [AllowAnonymous]
     public class LoginController : Controller
     {
-        private readonly UserManager<Usuario> _userManager;
-        public LoginController(UserManager<Usuario> userManager)
+        public LoginController()
         {
-            _userManager = userManager;
         }
         public IActionResult Index()
         {

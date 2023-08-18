@@ -15,7 +15,6 @@ namespace UI.Configurations
         {
             //DbContext
             services.AddScoped<DataContext>();
-
             //Applicações
             services.AddScoped<IArquivoApp, ArquivoApp>();
             services.AddScoped<IAulaApp, AulaApp>();
@@ -33,6 +32,7 @@ namespace UI.Configurations
             services.AddScoped<INotaAvaliacaoApp, NotaAvaliacaoApp>();
             services.AddScoped<IPaisApp, PaisApp>();
             services.AddScoped<IStatusPagamentoApp, StatusPagamentoApp>();
+            services.AddScoped<IUsuarioApp, UsuarioApp>();
             services.AddScoped<IUsuarioCursoApp, UsuarioCursoApp>();
             services.AddScoped<IUsuarioModuloApp, UsuarioModuloApp>();
 

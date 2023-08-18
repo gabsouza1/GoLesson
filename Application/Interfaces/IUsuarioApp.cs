@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    public interface IApplicationUserApp : IApp<UsuarioViewModel, Usuario>
+    public interface IUsuarioApp : IApp<UsuarioViewModel, Usuario>
     {
     }
 }

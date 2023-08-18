@@ -9,12 +9,10 @@ namespace UI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<Usuario> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<Usuario> userManager)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _userManager = userManager;
         }
 
         public IActionResult Index()

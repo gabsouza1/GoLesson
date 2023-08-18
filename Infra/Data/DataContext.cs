@@ -9,11 +9,10 @@ namespace Infra.Data
 {
     public class DataContext : IdentityDbContext<Usuario, IdentityRole<int>, int>
     { 
-        public DataContext()
+        public  DataContext()
         {
 
         }
-
         public DataContext(DbContextOptions<DataContext> options) : base(options) 
         {
             //ChangeTracker.AutoDetectChangesEnabled = true;
@@ -48,27 +47,6 @@ namespace Infra.Data
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
-        {
-            foreach (var entry in ChangeTracker.Entries()
-                .Where(entry => entry.Entity.GetType().GetProperty("CreatedAt") != null))
-            {
-                if (entry.State == EntityState.Added)
-                {
-                    entry.Property("CreatedAt").CurrentValue = DateTime.Now;
-                }
-
-                if (entry.State == EntityState.Modified)
-                {
-                    entry.Property("CreatedAt").IsModified = false;
-                }
-            }
-
-            return base.SaveChangesAsync(cancellationToken);
-        }
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

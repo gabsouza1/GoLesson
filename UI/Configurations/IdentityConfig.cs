@@ -13,16 +13,11 @@ namespace UI.Configurations
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
 
             services.AddDbContext<DataContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("Data Source=DESKTOP-KU3D3B1;Initial Catalog=GoLesson;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=true;"))
             );
-            services.AddIdentity<Usuario, IdentityRole<int>>(options =>
+            services.AddDefaultIdentity<Usuario>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 8;
@@ -41,7 +36,7 @@ namespace UI.Configurations
                 options.Lockout.MaxFailedAccessAttempts = 5;
             }
             )
-                    .AddRoleManager<RoleManager<IdentityRole<int>>>()
+                    .AddRoles<IdentityRole<int>>()
                     .AddEntityFrameworkStores<DataContext>()
                     .AddDefaultTokenProviders()
                     .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>();

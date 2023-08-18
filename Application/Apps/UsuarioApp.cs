@@ -12,12 +12,12 @@ using System.Threading.Tasks;
 
 namespace Application.Apps
 {
-    public class UsuarioApp : App<UsuarioViewModel, Usuario>, IApplicationUserApp
+    public class UsuarioApp : App<UsuarioViewModel, Usuario>, IUsuarioApp
     {
-        private readonly IUsuarioRepository _applicationUserRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public UsuarioApp(IUsuarioRepository applicationUserRepository, IMapper mapper
-            , ILogger<UsuarioApp> logger) : base(applicationUserRepository, mapper, logger)
+        public UsuarioApp(IUsuarioRepository usuarioRepository, IMapper mapper
+            , ILogger<UsuarioApp> logger) : base(usuarioRepository, mapper, logger)
         {
         }
     }
