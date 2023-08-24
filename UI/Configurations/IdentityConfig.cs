@@ -11,7 +11,11 @@ namespace UI.Configurations
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+            string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
+            services.AddDbContext<DataContext>(options =>
+                options.UseMySql(conn, ServerVersion.AutoDetect(conn))
+            ); ;
+            services.AddDefaultIdentity<Usuario>(options =>
             {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
