@@ -14,9 +14,7 @@ namespace UI.Configurations
             IConfiguration configuration)
         {
             string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
-            services.AddDbContext<DataContext>(options =>
-                options.UseMySql(conn, ServerVersion.AutoDetect(conn))
-            ); ;
+            services.AddDbContext<DataContext>();
             services.AddDefaultIdentity<Usuario>(options =>
             {
                 options.Password.RequireDigit = true;
