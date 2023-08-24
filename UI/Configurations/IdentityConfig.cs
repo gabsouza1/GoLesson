@@ -13,10 +13,10 @@ namespace UI.Configurations
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services,
             IConfiguration configuration)
         {
-
+            string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
             services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("Data Source=DESKTOP-KU3D3B1;Initial Catalog=GoLesson;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=true;"))
-            );
+                options.UseMySql(conn, ServerVersion.AutoDetect(conn))
+            ); ;
             services.AddDefaultIdentity<Usuario>(options =>
             {
                 options.Password.RequireDigit = true;

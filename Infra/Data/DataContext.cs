@@ -52,15 +52,11 @@ namespace Infra.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(GetConnectionString());
+            string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
+            optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
-        private string GetConnectionString()
-        {
-            var conn = "Data Source=DESKTOP-KU3D3B1;Initial Catalog=GoLesson;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=true;";
-            return conn;
-        }
     }
 }
