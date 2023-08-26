@@ -1,4 +1,6 @@
-﻿using Domain.Entities;
+﻿using Application.Apps;
+using Application.Interfaces;
+using Domain.Entities;
 using Infra.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,7 +24,9 @@ namespace UI
             services.AddAutoMapperConfiguration();
             services.AddControllersWithViews();
             services.AddIdentityConfiguration(Configuration);
+            services.ResolveDependencies();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            
 
         }
 
@@ -50,7 +54,7 @@ namespace UI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Genero}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "registro",

@@ -2,6 +2,67 @@
 @*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
+<div class="d-flex justify-content-center align-items-start" style="min-height: 100vh;">
+    <div class="login-box">
+        <div class="login-logo">
+            <a asp-action="Index" asp-controller="Home"><b>Go</b>Lesson</a>
+        </div>
 
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg">Login</p>
+                <form action="../../index3.html" method="post">
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Senha" class="form-control" placeholder="Senha">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember" asp-for="LembrarDeMim">
+                                <label for="remember">
+                                    Lembrar de mim?
+                                </label>
+                            </div>
+                        </div>
 
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                        </div>
+
+                    </div>
+                </form>
+                <div class="social-auth-links text-center mb-3">
+                    <p>- OU -</p>
+                    <a href="#" class="btn btn-block btn-primary">
+                        <i class="fab fa-facebook mr-2"></i> Entrar com Facebook
+                    </a>
+                    <a href="#" class="btn btn-block btn-danger">
+                        <i class="fab fa-google-plus mr-2"></i> Entrar com Google
+                    </a>
+                </div>
+
+                <p class="mb-1">
+                    <a href="forgot-password.html">Esqueci minha senha</a>
+                </p>
+                <p class="mb-0">
+                    <a asp-action="Index" asp-controller="Registro" class="text-center">Criar minha conta</a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
 

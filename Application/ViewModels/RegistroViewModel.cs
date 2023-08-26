@@ -9,6 +9,9 @@ namespace Application.ViewModels
 {
     public class RegistroViewModel
     {
+        [Required(ErrorMessage = "Campo Obrigatório")]
+        [StringLength(256, ErrorMessage = "Máximo de 256 caracteres", MinimumLength = 3)]
+        public string NomeCompleto { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
