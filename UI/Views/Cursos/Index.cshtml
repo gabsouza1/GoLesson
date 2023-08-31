@@ -1,6 +1,129 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Titulo"] = "Cursos";
 }
+<section class="content">
+    <div class="container-fluid">
 
+        <div class="row">
+            <div class="col-6">
+                <div class="input-group input-group-sm">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Pesquisar" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       </br>
+
+       <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Categoria: </label>
+                    <select multiple class="form-control">
+                        <option>Portugês</option>
+                        <option>Matemática</option>
+                        <option>Química</option>
+                        <option>Física</option>
+                        <option>História</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Nível: </label>
+                    <select multiple class="form-control">
+                        <option>Ensino Fundamental I</option>
+                        <option>Ensino Fundamental II</option>
+                        <option>Ensino Médio</option>
+                        <option>Pré-Vestibular</option>
+                        <option>Faculdade</option>
+                        <option>Concurso Público</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <label>Tipo de aula: </label>
+                <select class="form-control">
+                    <option>Ensino à Distância</option>
+                    <option>Presencial</option>
+                </select>
+            </div>
+
+            <div class="col-sm-4">
+                <label>Material para pessoa portadora de deficiência: </label>
+                <select class="form-control">
+                    <option>Sim</option>
+                    <option>Não</option>
+                </select>
+            </div>
+       </div>
+
+        <div class="row">
+
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/lib/imagens/cursophoto.png" alt="curso" />
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="card-title text-success" href="#">Nome Curso</a>
+                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                    <button type="button" class="btn btn-success">Saiba Mais</button>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/lib/imagens/cursophoto.png" alt="curso" />
+                    </div>
+  
+                    <div class="card-footer">
+                        <a class="card-title text-success" href="#">Nome Curso</a>
+                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                    <button type="button" class="btn btn-success">Saiba Mais</button>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="~/lib/imagens/cursophoto.png" alt="curso" />
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="card-title text-success" href="#">Nome Curso</a>
+                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                    </div>
+                    <button type="button" class="btn btn-success">Saiba Mais</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<script>
+    const contentDivs = document.querySelectorAll('.card-footer');
+    const maxLength = 590;
+
+    contentDivs.forEach(contentDiv => {
+        const contentText = contentDiv.querySelector('p').textContent;
+
+        if (contentText.length > maxLength) {
+            const trimmedText = contentText.slice(0, maxLength);
+
+            contentDiv.querySelector('p').innerText = `${trimmedText} [...]`;
+        }
+    })
+</script>
