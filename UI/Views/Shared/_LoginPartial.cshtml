@@ -23,14 +23,18 @@ else
         <a asp-action="Index" asp-controller="Carrinho" class="nav-link text-dark"><i class="nav-icon fa fa-solid fa-cart-plus fa-lg"></i></a>
     </li>
     <li class="nav-item mr-1">
-            <button type="button" class="btn btn-block btn-success">
-                <a asp-action="Index" asp-controller="Login" class="text-white">Login</a>
-            </button>
+            <a asp-action="Index" asp-controller="Login" class="text-white">
+                <button type="button" class="btn btn-block btn-success">
+                    Login
+                </button>
+            </a>
     </li>
     <li class="nav-item mr-1">
-            <button type="button" class="btn btn-block btn-Info">
-                <a asp-action="Index" asp-controller="Registro" class="text-white">Criar Nova Conta</a>
-            </button>
+            <a asp-action="Index" asp-controller="Registro" class="text-white">
+                <button type="button" class="btn btn-block btn-Info">
+                    Criar Nova Conta
+                </button>
+            </a>
     </li>
 }
 </ul>
