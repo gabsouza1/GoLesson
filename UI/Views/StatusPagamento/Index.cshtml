@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Application.ViewModels.StatusPagamentoViewModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<a asp-action="Create" asp-controller="StatusPagamento">Adicionar Novo StatusPagamento</a>
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                        <td>@item.NomeStatusPagamento</td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="StatusPagamento" asp-route-id="@item.Id" class="btn btn-primary">Editar</a>
+                            <a asp-action="Delete" asp-controller="StatusPagamento" asp-route-id="@item.Id" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -16,7 +16,7 @@ namespace UI.Controllers
             _generoApp = generoApp;
             _logger = logger;
         }
-        // GET: GeneroController
+        // GET: GeneroController12
         public async Task<IActionResult> Index()
         {
             var generos = await _generoApp.GetAllAsync();

@@ -8,5 +8,8 @@ namespace Application.ViewModels
 {
     public class StatusPagamentoViewModel
     {
+        public int Id { get; set; } 
+        public string NomeStatusPagamento { get; set; }
+
     }
 }

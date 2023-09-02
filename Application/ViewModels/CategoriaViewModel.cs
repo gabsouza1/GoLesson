@@ -10,6 +10,6 @@ namespace Application.ViewModels
     {
         public int Id { get; set; }
         public string NomeCategoria { get; set; }
-        public string NomeOutraCoisa { get; set; }
+        
     }
 }
