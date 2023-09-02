@@ -59,7 +59,12 @@ namespace UI.Controllers
         // GET: GeneroController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var edit = await _generoApp.GetByIdAsync(id);
+            GeneroViewModel generoViewModel = new();
+            var edit = await _generoApp.GetByIdAsync(id) ?? generoViewModel;
+            if(edit == generoViewModel)
+            {
+                return BadRequest();
+            }
             return View(edit);
         }
 

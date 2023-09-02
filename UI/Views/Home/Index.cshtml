@@ -1,52 +1,75 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1>Fixed Navbar Layout</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                    <li class="breadcrumb-item active">Fixed Navbar Layout</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="content">
+﻿<section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12">
+            <div class="col-lg-2 d-flex justify-content-center align-content-center">
+            </div>
+            <div class="col-lg-8 d-flex justify-content-center align-content-center">
+                <div>
+                    <!-- Início do texto de introdução -->
+                    <p class="d-flex justify-content-center align-content-center"><strong>Bem-vindo à GoLesson - O Seu Destino para o Aprendizado Personalizado!</strong></p>
+                    <p>Descubra uma nova abordagem emocionante para a educação que coloca você no controle do seu aprendizado. Na [Nome da Plataforma], acreditamos que cada aluno é único e tem necessidades específicas quando se trata de alcançar o sucesso acadêmico. E não é só isso – nós também valorizamos os incríveis educadores que trazem conhecimento e paixão para a sala de aula.</p>
 
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Title</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                            <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                                <i class="fas fa-times"></i>
-                            </button>
+                    <p><strong>Alunos:</strong></p>
+                    <p>Você está pronto para desbloquear seu potencial máximo? Nossa plataforma oferece uma ampla gama de conteúdos educativos, desde aulas de matemática até cursos avançados de línguas. Explore opções de aprendizado personalizado que se adaptam ao seu estilo e ritmo únicos. Com a [Nome da Plataforma], você pode ganhar confiança e conquistar suas metas acadêmicas, com recursos que vão além do tradicional.</p>
+
+                    <p><strong>Professores:</strong></p>
+                    <p>Se você é um educador apaixonado, a GoLesson é o lugar perfeito para compartilhar sua expertise com o mundo. Crie cursos envolventes e interativos que atendam às necessidades dos alunos. Seja recompensado pelo seu trabalho duro enquanto ajuda os alunos a crescer e a prosperar. Com a [Nome da Plataforma], sua dedicação à educação ganha vida de maneira impactante.</p>
+
+                    <p>Nossa missão é proporcionar uma experiência de aprendizado que transcende os limites tradicionais. Estamos empenhados em capacitar estudantes e educadores a se conectarem, colaborarem e prosperarem juntos. Junte-se a nós nessa jornada e comece a explorar um mundo de possibilidades educacionais.</p>
+
+                    <p>Prepare-se para uma transformação educacional. Bem-vindo à GoLesson.</p>
+                    <!-- Fim do texto de introdução -->
+                </div>
+            </div>
+            <div class="col-lg-2 d-flex justify-content-center align-content-center">
+            </div>
+            <div class="col-lg-2 d-flex justify-content-center align-content-center">
+            </div>
+            <div class="col-lg-8 d-flex justify-content-center align-content-center">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="5000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="~/lib/Resources/imagens/studentdark.jpg" class="d-block w-100 h-100" style="object-fit: cover" alt="Students">
+                            <div class="carousel-caption">
+                                <h3>Alunos</h3>
+                                <p class="color: #D9D9D9">
+                                    <strong> 
+                                        Encontre aulas personalizadas e aprenda no seu próprio ritmo.
+                                    </strong>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="~/lib/Resources/imagens/teaching.jpg" class="d-block w-100 h-100" style="object-fit: cover" alt="Students">
+                            <div class="carousel-caption">
+                                <h3>Professores</h3>
+                                <p>
+                                    <strong>
+                                        Crie conteúdos envolventes e construa uma comunidade de alunos dedicados.
+                                    </strong>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body">
-                        Start creating your amazing application!
-                    </div>
-
-                    <div class="card-footer">
-                        Footer
-                    </div>
-
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-
+            </div>
+            <div class="col-lg-2 d-flex justify-content-center align-content-center">
             </div>
         </div>
     </div>
 </section>
+@section Scripts {
+   
+}
