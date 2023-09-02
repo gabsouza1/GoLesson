@@ -11,7 +11,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Login</p>
-                <form action="../../index3.html" method="post">
+                <form asp-action="Login" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" asp-for="Email" placeholder="Email">
                         <div class="input-group-append">
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" asp-for="Senha" class="form-control" placeholder="Senha">
+                        <input type="password" asp-for="Senha" class="form-control" required placeholder="Senha">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -37,9 +37,9 @@
                                 </label>
                             </div>
                         </div>
-
+                        <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-success btn-block">Entrar</button>
+                            <button type="submit" class="btn btn-success btn-block" >Entrar</button>
                         </div>
 
                     </div>

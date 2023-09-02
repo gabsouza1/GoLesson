@@ -1,30 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using Microsoft.AspNetCore.Identity;
+@using Domain.Entities;
+@inject UserManager<Usuario> UserManager
 @{
 }
+
 
 <aside class="main-sidebar sidebar-dark-success bg-success elevation-4">
 
     <a asp-action="Index" asp-controller="Home" class="brand-link elevation-4 bg-success d-flex align-items-center">
-        <img src="~/lib/imagens/golesson.png" alt="GoLesson" class="brand-image img-size-32 elevation-2" width="32px" height="32px" style="opacity: .7">
+        <img src="~/lib/Resources/icones/hat.png" alt="GoLesson" class="brand-image img-size-32" width="32px" height="32px" style="opacity: .7">
         <span class="brand-text font-weight-light ml-2">Go Lesson</span>
     </a>
 
     <div class="sidebar">
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="~/lib/admin-lte/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/lib/admin-lte/img/user1-128x128.jpg" width="32px" height="32px" class="img-circle" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block text-dark">@UserManager.GetUserName(User)</a>
+                </div>
             </div>
-            <div class="info">
-                <a href="#" class="d-block text-dark">Alexander Pierce</a>
+        }
+        else
+        {
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="~/lib/Resources/icones/user.png" width="32px" height="32px" class="img-circle bg-success" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block text-dark"><strong>Visitante</strong></a>
+                </div>
             </div>
-        </div>
+        }
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
                     <a asp-action="Index" asp-controller="Home" class="nav-link">
-                        <i class="nav-icon fa fa-solid fa-house"></i>
+                        <i class="nav-icon fa fa-solid fa-house-user"></i>
                         <p class="text-dark">
                             <strong>Página Inicial</strong>
                             <span></span>
