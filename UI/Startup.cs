@@ -65,6 +65,10 @@ namespace UI
                     name: "login",
                     pattern: "login",
                     defaults: new { controller = "Login", action = "Login" });
+                endpoints.MapControllerRoute(
+                    name: "logout",
+                    pattern: "logout",
+                    defaults: new { controller = "Home", action = "Index" });
 
             });
         }

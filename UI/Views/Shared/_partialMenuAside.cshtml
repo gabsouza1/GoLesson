@@ -6,12 +6,10 @@
 
 
 <aside class="main-sidebar sidebar-dark-success bg-success elevation-4">
-
     <a asp-action="Index" asp-controller="Home" class="brand-link elevation-4 bg-success d-flex align-items-center">
         <img src="~/lib/Resources/icones/hat.png" alt="GoLesson" class="brand-image img-size-32" width="32px" height="32px" style="opacity: .7">
         <span class="brand-text font-weight-light ml-2">Go Lesson</span>
     </a>
-
     <div class="sidebar">
         @if (User.Identity.IsAuthenticated)
         {
@@ -20,7 +18,7 @@
                     <img src="~/lib/admin-lte/img/user1-128x128.jpg" width="32px" height="32px" class="img-circle" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block text-dark">@UserManager.GetUserName(User)</a>
+                    <a href="#" class="d-block text-dark">@UserManager.FindByEmailAsync(User.Identity.Name).Result.NomeCompleto</a>
                 </div>
             </div>
         }

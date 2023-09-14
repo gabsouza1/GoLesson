@@ -10,7 +10,8 @@ namespace Domain.Entities
 {
     public class Usuario : IdentityUser<int>
     {
-        public int GeneroId { get; set; }
+        public string? NomeCompleto { get; set; }
+        public int? GeneroId { get; set; }
         public string? Foto { get; set; }
         public bool Ativo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;

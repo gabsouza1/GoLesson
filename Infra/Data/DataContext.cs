@@ -53,6 +53,8 @@ namespace Infra.Data
             base.OnConfiguring(optionsBuilder);
 
             string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
+            //string conn = "Data Source=;Initial Catalog=GoLesson;Integrated Security=True;TrustServerCertificate=True";
+            //optionsBuilder.UseSqlServer(conn);
             optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.EnableSensitiveDataLogging();

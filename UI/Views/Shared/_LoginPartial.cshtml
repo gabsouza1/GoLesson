@@ -9,10 +9,12 @@
         <a class="nav-link"><i class="nav-icon fa fa-solid fa-cart-shopping"></i></a>
     </li>
     <li class="nav-item mr-1">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Olá, @User.Identity?.Name!</a>
+        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            Olá, @UserManager.FindByEmailAsync(User.Identity.Name).Result.NomeCompleto!
+        </a>
     </li>
     <li class="nav-item mr-1">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <form  class="form-inline" asp-area="Identity" asp-action="Logout" asp-controller="Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
             <button  type="submit" class="nav-link btn btn-link text-dark">Sair</button>
         </form>
     </li>

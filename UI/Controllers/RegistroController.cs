@@ -1,10 +1,20 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Interfaces;
+using Application.ViewModels;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace UI.Controllers
 {
     public class RegistroController : Controller
     {
+        private readonly IUsuarioApp _usuarioApp;
+
+        public RegistroController(IUsuarioApp usuarioApp)
+        {
+            _usuarioApp = usuarioApp;
+        }
+
+
         // GET: RegistroController
         public ActionResult Index()
         {
@@ -26,10 +36,17 @@ namespace UI.Controllers
         // POST: RegistroController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(RegistroViewModel model)
         {
             try
             {
+                if(!ModelState.IsValid)
+                {
+                    ModelState.AddModelError("", "Preencha os campos  corretamente");
+                    return View(nameof(Index), model);
+                }
+
+                var result = await _usuarioApp.AddAsync(model);
                 return RedirectToAction(nameof(Index));
             }
             catch

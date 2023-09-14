@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Criar Nova Conta</p>
-                <form action="../../index.html" method="post">
+                <form asp-action="Create" asp-controller="Registro" method="post">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" asp-for="NomeCompleto" placeholder="Nome Completo">
                         <div class="input-group-append">
@@ -81,7 +81,10 @@
                         Entre com o Google
                     </a>
                 </div>
-                <a asp-action="Index" asp-controller="Login" class="text-center">Já possuo uma conta</a>
+                <div class="d-flex justify-content-center align-items-center">
+                    <a asp-action="Index" asp-controller="Login" class="text-center">Já possuo uma conta</a>
+                </div>
+                
             </div>
 
         </div>

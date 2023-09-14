@@ -16,6 +16,7 @@ namespace Infra.Mappings
         {
             builder.ToTable("Usuarios");
             builder.HasKey(a => a.Id);
+            builder.Property(a => a.NomeCompleto).HasColumnType("text");
             builder.HasOne(a => a.Generos).WithMany(g => g.User).HasForeignKey(fk => fk.GeneroId);
             builder.HasMany(a => a.UsuariosCursos).WithOne(uc => uc.User).HasForeignKey(fk => fk.UsuarioId);
             builder.HasMany(a => a.Favoritos).WithOne(f => f.Usuarios).HasForeignKey(fk => fk.UsuarioId);

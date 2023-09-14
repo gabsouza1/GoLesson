@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230824014948_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230913232253_NewUserClass")]
+    partial class NewUserClass
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -469,7 +469,7 @@ namespace Infra.Migrations
                     b.Property<string>("Foto")
                         .HasColumnType("longtext");
 
-                    b.Property<int>("GeneroId")
+                    b.Property<int?>("GeneroId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedAt")
@@ -480,6 +480,9 @@ namespace Infra.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("NomeCompleto")
+                        .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -873,9 +876,7 @@ namespace Infra.Migrations
                 {
                     b.HasOne("Domain.Entities.Genero", "Generos")
                         .WithMany("User")
-                        .HasForeignKey("GeneroId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GeneroId");
 
                     b.Navigation("Generos");
                 });
