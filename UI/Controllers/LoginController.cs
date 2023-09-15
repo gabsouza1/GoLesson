@@ -29,7 +29,7 @@ namespace UI.Controllers
             {
                 if(ModelState.IsValid) 
                 {
-                    var isAuthenticated = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarDeMim, false);
+                    var isAuthenticated = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarDeMim, model.LembrarDeMim);
 
                     if(isAuthenticated.Succeeded) 
                     {

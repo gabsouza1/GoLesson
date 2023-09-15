@@ -4,20 +4,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{88439126-E996-4DCC-AA70-A324BF82C8E6}"
+	ProjectSection(SolutionItems) = preProject
+		Migrations.txt = Migrations.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{7A598D79-8A89-4408-AD1E-64F5431F4B64}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{79EEB6F0-A3D6-4139-A3F6-075938899066}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{8DBF5BC3-3F63-42D4-889E-3C9647EC4F89}"
+	ProjectSection(SolutionItems) = preProject
+		Migrations.txt = Migrations.txt
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra", "Infra\Infra.csproj", "{B348797F-DEED-4D6A-9BD2-E0249D525575}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{B348797F-DEED-4D6A-9BD2-E0249D525575}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{06C8FF22-0C5E-42F1-ADAA-A8CE015771DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{06C8FF22-0C5E-42F1-ADAA-A8CE015771DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{D8AD2264-EC32-4813-AFE5-595844165B74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{D8AD2264-EC32-4813-AFE5-595844165B74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "UI\UI.csproj", "{1E6F163F-E7EA-45CD-98B8-60983ABDD922}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UI", "UI\UI.csproj", "{1E6F163F-E7EA-45CD-98B8-60983ABDD922}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
