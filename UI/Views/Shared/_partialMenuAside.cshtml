@@ -18,7 +18,7 @@
                     <img src="~/lib/admin-lte/img/user1-128x128.jpg" width="32px" height="32px" class="img-circle" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block text-dark">@UserManager.FindByEmailAsync(User.Identity.Name).Result.NomeCompleto</a>
+                    <a asp-controller="Usuario" asp-action="Edit" asp-route-id="@UserManager.FindByNameAsync(User.Identity.Name).Result.Id" class="d-block text-dark">@UserManager.FindByEmailAsync(User.Identity.Name).Result.NomeCompleto</a>
                 </div>
             </div>
         }

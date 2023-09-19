@@ -3,6 +3,7 @@ using System;
 using Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -20,7 +21,9 @@ namespace Infra.Migrations
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Domain.Entities.Arquivo", b =>
                 {
@@ -28,16 +31,18 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AulaId")
                         .HasColumnType("int");
 
                     b.Property<string>("MIME")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeArquivo")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -52,29 +57,31 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Conteudo")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("ModuloId")
                         .HasColumnType("int");
 
                     b.Property<string>("NomeAula")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -91,17 +98,19 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("NotaAvaliacao")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -121,9 +130,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomeCategoria")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -136,12 +147,14 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("EstadoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -156,9 +169,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("Bairro")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CidadeId")
                         .HasColumnType("int");
@@ -166,7 +181,7 @@ namespace Infra.Migrations
                     b.Property<string>("Codigo")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.HasKey("Id");
 
@@ -181,17 +196,19 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataCompra")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("FormaPagamentoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("StatusPagamentoId")
                         .HasColumnType("int");
@@ -216,25 +233,27 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NomeCurso")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -249,16 +268,18 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("CodigoPostalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Numero")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -278,16 +299,18 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomeEstado")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PaisesId")
                         .HasColumnType("int");
 
                     b.Property<string>("UF")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -305,10 +328,10 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("UsuarioId", "CursoId");
 
@@ -323,9 +346,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomeFormaPagamento")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -338,9 +363,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomeGenero")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -353,22 +380,24 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Titulo")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -383,17 +412,19 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AulaId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("Nota")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
@@ -413,9 +444,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomePais")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -428,9 +461,11 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("NomeStatusPagamento")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -443,70 +478,78 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<bool>("Ativo")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DataNasc")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("EnderecoId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Foto")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GeneroId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetime(6)");
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NomeCompleto")
                         .HasColumnType("text");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("tinyint(1)");
+                        .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -517,7 +560,8 @@ namespace Infra.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Usuarios", (string)null);
                 });
@@ -546,7 +590,7 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("NotaMedia")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("UsuarioId", "ModuloId");
 
@@ -561,23 +605,26 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("varchar(256)");
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
                 });
@@ -588,11 +635,13 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("ClaimType")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
@@ -610,11 +659,13 @@ namespace Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("ClaimType")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -629,13 +680,13 @@ namespace Infra.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -668,13 +719,13 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("longtext");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
