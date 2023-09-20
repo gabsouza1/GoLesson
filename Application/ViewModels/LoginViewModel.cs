@@ -10,11 +10,11 @@ namespace Application.ViewModels
 {
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Preencha o email")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Preencha a senha")]
         [DataType(DataType.Password)]
         public string Senha { get; set; }
 

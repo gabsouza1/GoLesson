@@ -29,7 +29,7 @@ namespace UI.Controllers
             {
                 if(ModelState.IsValid) 
                 {
-                    var isAuthenticated = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarDeMim, model.LembrarDeMim);
+                    var isAuthenticated = await _signInManager.PasswordSignInAsync(model.Email, model.Senha, model.LembrarDeMim, false);
 
                     if(isAuthenticated.Succeeded) 
                     {
@@ -40,7 +40,7 @@ namespace UI.Controllers
                         ModelState.AddModelError("", "Email ou Senha incorretos");
                     }
                 }
-                return View(model); 
+                return View("Index", model); 
             }catch (Exception ex)
             {
                 return View("Index");
