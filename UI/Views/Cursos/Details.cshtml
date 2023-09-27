@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Titulo"] = "Curso";
+}
+<section class="content">
+
+    <div class="container-fluid">
+       <div class="row">
+            <div class="col-lg-1 d-flex justify-content-center align-content-center" ></div>
+
+            <div class="col-lg-5 d-flex justify-content-center align-content-center">
+                <img src="~/lib/Resources/logo/cursophoto.png" alt="curso" />
+            </div>
+
+            <div class="col-lg-5 justify-content-center align-content-center">
+                <h4 class="title">Nome Curso</h4>
+                <div class="col-11 d-flex justify-content-center align-content-center">
+                    <p>
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </p>
+                </div>
+                <h5 class="success">R$ 100,00</h5>
+
+                <button type="button" class="btn btn-success">Adicionar ao carrinho</button>
+                <a asp-action="Payment" asp-controller="Cursos" class="btn btn-success">Comprar</a>
+            </div>
+
+            <div class="col-lg-1 d-flex justify-content-center align-content-center"></div>
+       </div>
+    </div>
+
+</section>
