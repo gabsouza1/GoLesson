@@ -17,6 +17,13 @@ namespace UI.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
+        public IActionResult TeacherIndex()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Profile(string id)
         {
             try
