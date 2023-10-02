@@ -13,6 +13,9 @@ namespace Domain.Entities
         public string Descricao { get; set; }
         public int CategoriaId { get; set; }
         public decimal Valor { get; set; }
+        public bool Pdc { get; set; }
+
+        public string Nivel { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Categoria? Categorias { get; set; }
@@ -21,5 +24,6 @@ namespace Domain.Entities
         public virtual ICollection<Aula>? Aulas { get; set; }
         public virtual ICollection<Favorito>? Favoritos { get; set; }
         public virtual ICollection<AvaliacaoCurso>? AvaliacaoCursos { get; set; }
+        public virtual ICollection<Materia>? Materias { get; set; }
     }
 }
