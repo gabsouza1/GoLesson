@@ -69,7 +69,6 @@ namespace UI
                     name: "logout",
                     pattern: "logout",
                     defaults: new { controller = "Home", action = "Index" });
-
             });
         }
     }
