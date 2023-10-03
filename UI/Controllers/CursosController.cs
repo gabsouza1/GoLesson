@@ -4,11 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace UI.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class CursosController : Controller
     {
         // GET: CursosController
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Aluno")]
+        public IActionResult MeusCursos()
         {
             return View();
         }
