@@ -8,7 +8,6 @@ namespace Domain.Entities
 {
     public class MateriaCursos
     {
-        public int Id { get; set; }
         public int CursoId { get; set; }
         public int MateriaId { get; set; }
 

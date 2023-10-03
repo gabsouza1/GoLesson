@@ -14,13 +14,11 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<Usuario> builder)
         {
-            builder.ToTable("Usuarios");
             builder.HasKey(a => a.Id);
             builder.Property(a => a.NomeCompleto).HasColumnType("text");
             builder.HasOne(a => a.Generos).WithMany(g => g.Usuario).HasForeignKey(fk => fk.GeneroId);
             builder.HasMany(a => a.UsuariosCursos).WithOne(uc => uc.User).HasForeignKey(fk => fk.UsuarioId);
             builder.HasMany(a => a.AvaliacoesCursos).WithOne(ac => ac.Usuarios).HasForeignKey(fk => fk.UsuarioId);
-            builder.HasMany(a => a.Enderecos).WithOne(e => e.Usuarios).HasForeignKey(fk => fk.UsuarioId);
         }
     }
 }

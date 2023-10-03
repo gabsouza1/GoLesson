@@ -16,7 +16,7 @@ namespace Infra.Mappings
         {
             builder.ToTable("Enderecos");
             builder.HasKey(p => p.Id);
-
+            builder.HasOne(u => u.Usuarios).WithMany(e => e.Enderecos).HasForeignKey(e => e.UsuarioId);  
         }
     }
 }

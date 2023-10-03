@@ -25,73 +25,6 @@ namespace Infra.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.Entities.Arquivo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AulaId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MIME")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NomeArquivo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AulaId");
-
-                    b.ToTable("Arquivos", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Aula", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Conteudo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ModuloId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("NomeAula")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
-
-                    b.HasIndex("ModuloId");
-
-                    b.ToTable("Aulas", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.AvaliacaoCurso", b =>
                 {
                     b.Property<int>("Id")
@@ -138,56 +71,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorias", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Cidade", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EstadoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EstadoId");
-
-                    b.ToTable("Cidades", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.CodigoPostal", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Bairro")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CidadeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Codigo")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CidadeId");
-
-                    b.ToTable("CodigosPostais", (string)null);
+                    b.ToTable("Categorias");
                 });
 
             modelBuilder.Entity("Domain.Entities.Compra", b =>
@@ -204,23 +88,13 @@ namespace Infra.Migrations
                     b.Property<DateTime>("DataCompra")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FormaPagamentoId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("LastUpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("StatusPagamentoId")
-                        .HasColumnType("int");
 
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FormaPagamentoId");
-
-                    b.HasIndex("StatusPagamentoId");
 
                     b.HasIndex("UsuarioId");
 
@@ -235,6 +109,9 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("Acessibilidade")
+                        .HasColumnType("bit");
+
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 
@@ -247,6 +124,10 @@ namespace Infra.Migrations
 
                     b.Property<DateTime?>("LastUpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Nivel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeCurso")
                         .IsRequired()
@@ -262,6 +143,21 @@ namespace Infra.Migrations
                     b.ToTable("Cursos", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.CursosNiveis", b =>
+                {
+                    b.Property<int>("NivelId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CursoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("NivelId", "CursoId");
+
+                    b.HasIndex("CursoId");
+
+                    b.ToTable("CursosNiveis", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Endereco", b =>
                 {
                     b.Property<int>("Id")
@@ -270,10 +166,15 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CodigoPostalId")
-                        .HasColumnType("int");
+                    b.Property<string>("Cidade")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("CodigoPostal")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -281,80 +182,18 @@ namespace Infra.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CodigoPostalId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("Enderecos", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Estado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NomeEstado")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PaisesId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UF")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("PaisesId");
-
-                    b.ToTable("Estados", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Favorito", b =>
-                {
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CursoId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("UsuarioId", "CursoId");
-
-                    b.HasIndex("CursoId");
-
-                    b.ToTable("Favoritos", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.FormaPagamento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NomeFormaPagamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("FormasPagamentos", (string)null);
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Enderecos", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Genero", b =>
@@ -374,7 +213,7 @@ namespace Infra.Migrations
                     b.ToTable("Generos", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Modulo", b =>
+            modelBuilder.Entity("Domain.Entities.Materia", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -382,31 +221,31 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Materia", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.MateriaCursos", b =>
+                {
+                    b.Property<int>("MateriaId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CursoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
+                    b.HasKey("MateriaId", "CursoId");
 
                     b.HasIndex("CursoId");
 
-                    b.ToTable("Modulos", (string)null);
+                    b.ToTable("MateriasCursos", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.NotaAvaliacao", b =>
+            modelBuilder.Entity("Domain.Entities.NivelEscolaridade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -414,62 +253,13 @@ namespace Infra.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AulaId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("Nota")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AulaId");
-
-                    b.HasIndex("UsuarioId");
-
-                    b.ToTable("NotasAvaliacoes", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.Pais", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NomePais")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Paises", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.StatusPagamento", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("NomeStatusPagamento")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("StatusPagamentos", (string)null);
+                    b.ToTable("NivelEscolaridade", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuario", b =>
@@ -502,9 +292,6 @@ namespace Infra.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<int?>("EnderecoId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Foto")
                         .HasColumnType("nvarchar(max)");
@@ -563,7 +350,7 @@ namespace Infra.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("Usuarios", (string)null);
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UsuarioCurso", b =>
@@ -579,24 +366,6 @@ namespace Infra.Migrations
                     b.HasIndex("CursoId");
 
                     b.ToTable("UsuariosCursos", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.UsuarioModulo", b =>
-                {
-                    b.Property<int>("UsuarioId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ModuloId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("NotaMedia")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("UsuarioId", "ModuloId");
-
-                    b.HasIndex("ModuloId");
-
-                    b.ToTable("UsuariosModulos", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
@@ -732,36 +501,6 @@ namespace Infra.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Arquivo", b =>
-                {
-                    b.HasOne("Domain.Entities.Aula", "Aulas")
-                        .WithMany("Arquivos")
-                        .HasForeignKey("AulaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aulas");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Aula", b =>
-                {
-                    b.HasOne("Domain.Entities.Curso", "Cursos")
-                        .WithMany("Aulas")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Modulo", "Modulos")
-                        .WithMany("Aulas")
-                        .HasForeignKey("ModuloId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Cursos");
-
-                    b.Navigation("Modulos");
-                });
-
             modelBuilder.Entity("Domain.Entities.AvaliacaoCurso", b =>
                 {
                     b.HasOne("Domain.Entities.Curso", "Cursos")
@@ -781,51 +520,13 @@ namespace Infra.Migrations
                     b.Navigation("Usuarios");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cidade", b =>
-                {
-                    b.HasOne("Domain.Entities.Estado", "Estados")
-                        .WithMany("Cidades")
-                        .HasForeignKey("EstadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Estados");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CodigoPostal", b =>
-                {
-                    b.HasOne("Domain.Entities.Cidade", "Cidades")
-                        .WithMany("CodigoPostal")
-                        .HasForeignKey("CidadeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cidades");
-                });
-
             modelBuilder.Entity("Domain.Entities.Compra", b =>
                 {
-                    b.HasOne("Domain.Entities.FormaPagamento", "FormaPagamento")
-                        .WithMany("Compras")
-                        .HasForeignKey("FormaPagamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.StatusPagamento", "StatusPagamento")
-                        .WithMany("Compras")
-                        .HasForeignKey("StatusPagamentoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Usuario", "Usuarios")
                         .WithMany("Compras")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("FormaPagamento");
-
-                    b.Navigation("StatusPagamento");
 
                     b.Navigation("Usuarios");
                 });
@@ -841,89 +542,59 @@ namespace Infra.Migrations
                     b.Navigation("Categorias");
                 });
 
+            modelBuilder.Entity("Domain.Entities.CursosNiveis", b =>
+                {
+                    b.HasOne("Domain.Entities.Curso", "Curso")
+                        .WithMany("CursosNiveis")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.NivelEscolaridade", "NivelEscolaridade")
+                        .WithMany("CursosNiveis")
+                        .HasForeignKey("NivelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Curso");
+
+                    b.Navigation("NivelEscolaridade");
+                });
+
             modelBuilder.Entity("Domain.Entities.Endereco", b =>
                 {
-                    b.HasOne("Domain.Entities.CodigoPostal", "CodigoPostal")
-                        .WithMany("Enderecos")
-                        .HasForeignKey("CodigoPostalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Domain.Entities.Usuario", "Usuarios")
                         .WithMany("Enderecos")
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("CodigoPostal");
-
                     b.Navigation("Usuarios");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Estado", b =>
+            modelBuilder.Entity("Domain.Entities.MateriaCursos", b =>
                 {
-                    b.HasOne("Domain.Entities.Pais", "Paises")
-                        .WithMany("Estados")
-                        .HasForeignKey("PaisesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Paises");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Favorito", b =>
-                {
-                    b.HasOne("Domain.Entities.Curso", "Cursos")
-                        .WithMany("Favoritos")
+                    b.HasOne("Domain.Entities.Curso", "Curso")
+                        .WithMany("MateriasCursos")
                         .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.Usuario", "Usuarios")
-                        .WithMany("Favoritos")
-                        .HasForeignKey("UsuarioId")
+                    b.HasOne("Domain.Entities.Materia", "Materia")
+                        .WithMany("MateriaCursos")
+                        .HasForeignKey("MateriaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cursos");
+                    b.Navigation("Curso");
 
-                    b.Navigation("Usuarios");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Modulo", b =>
-                {
-                    b.HasOne("Domain.Entities.Curso", "Cursos")
-                        .WithMany("Modulos")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cursos");
-                });
-
-            modelBuilder.Entity("Domain.Entities.NotaAvaliacao", b =>
-                {
-                    b.HasOne("Domain.Entities.Aula", "Aulas")
-                        .WithMany("NotasAvaliacoes")
-                        .HasForeignKey("AulaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Usuario", "Usuarios")
-                        .WithMany("NotasAvaliacoes")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Aulas");
-
-                    b.Navigation("Usuarios");
+                    b.Navigation("Materia");
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
                     b.HasOne("Domain.Entities.Genero", "Generos")
-                        .WithMany("User")
+                        .WithMany("Usuario")
                         .HasForeignKey("GeneroId");
 
                     b.Navigation("Generos");
@@ -946,25 +617,6 @@ namespace Infra.Migrations
                     b.Navigation("Cursos");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Domain.Entities.UsuarioModulo", b =>
-                {
-                    b.HasOne("Domain.Entities.Modulo", "Modulos")
-                        .WithMany("UsuariosModulos")
-                        .HasForeignKey("ModuloId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Usuario", "Usuario")
-                        .WithMany("UsuarioModulos")
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Modulos");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1018,71 +670,35 @@ namespace Infra.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Domain.Entities.Aula", b =>
-                {
-                    b.Navigation("Arquivos");
-
-                    b.Navigation("NotasAvaliacoes");
-                });
-
             modelBuilder.Entity("Domain.Entities.Categoria", b =>
                 {
                     b.Navigation("Cursos");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Cidade", b =>
-                {
-                    b.Navigation("CodigoPostal");
-                });
-
-            modelBuilder.Entity("Domain.Entities.CodigoPostal", b =>
-                {
-                    b.Navigation("Enderecos");
-                });
-
             modelBuilder.Entity("Domain.Entities.Curso", b =>
                 {
-                    b.Navigation("Aulas");
-
                     b.Navigation("AvaliacaoCursos");
 
-                    b.Navigation("Favoritos");
+                    b.Navigation("CursosNiveis");
 
-                    b.Navigation("Modulos");
+                    b.Navigation("MateriasCursos");
 
                     b.Navigation("UsuariosCursos");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Estado", b =>
-                {
-                    b.Navigation("Cidades");
-                });
-
-            modelBuilder.Entity("Domain.Entities.FormaPagamento", b =>
-                {
-                    b.Navigation("Compras");
-                });
-
             modelBuilder.Entity("Domain.Entities.Genero", b =>
                 {
-                    b.Navigation("User");
+                    b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Modulo", b =>
+            modelBuilder.Entity("Domain.Entities.Materia", b =>
                 {
-                    b.Navigation("Aulas");
-
-                    b.Navigation("UsuariosModulos");
+                    b.Navigation("MateriaCursos");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Pais", b =>
+            modelBuilder.Entity("Domain.Entities.NivelEscolaridade", b =>
                 {
-                    b.Navigation("Estados");
-                });
-
-            modelBuilder.Entity("Domain.Entities.StatusPagamento", b =>
-                {
-                    b.Navigation("Compras");
+                    b.Navigation("CursosNiveis");
                 });
 
             modelBuilder.Entity("Domain.Entities.Usuario", b =>
@@ -1092,12 +708,6 @@ namespace Infra.Migrations
                     b.Navigation("Compras");
 
                     b.Navigation("Enderecos");
-
-                    b.Navigation("Favoritos");
-
-                    b.Navigation("NotasAvaliacoes");
-
-                    b.Navigation("UsuarioModulos");
 
                     b.Navigation("UsuariosCursos");
                 });

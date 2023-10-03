@@ -14,7 +14,6 @@ namespace Domain.Entities
         public DateTime? DataNasc {  get; set; }
         public string? Foto { get; set; }
         public int? GeneroId { get; set; }
-        public int? EnderecoId { get; set; }
         public bool Ativo { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;

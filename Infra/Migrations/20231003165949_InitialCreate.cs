@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class NewUserClass : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -40,19 +40,6 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FormasPagamentos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeFormaPagamento = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FormasPagamentos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Generos",
                 columns: table => new
                 {
@@ -66,29 +53,29 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Paises",
+                name: "Materia",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomePais = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Paises", x => x.Id);
+                    table.PrimaryKey("PK_Materia", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StatusPagamentos",
+                name: "NivelEscolaridade",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeStatusPagamento = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StatusPagamentos", x => x.Id);
+                    table.PrimaryKey("PK_NivelEscolaridade", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,6 +109,8 @@ namespace Infra.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Acessibilidade = table.Column<bool>(type: "bit", nullable: false),
+                    Nivel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -137,7 +126,7 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Usuarios",
+                name: "AspNetUsers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -146,7 +135,6 @@ namespace Infra.Migrations
                     DataNasc = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Foto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     GeneroId = table.Column<int>(type: "int", nullable: true),
-                    EnderecoId = table.Column<int>(type: "int", nullable: true),
                     Ativo = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -167,54 +155,58 @@ namespace Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Usuarios_Generos_GeneroId",
+                        name: "FK_AspNetUsers_Generos_GeneroId",
                         column: x => x.GeneroId,
                         principalTable: "Generos",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Estados",
+                name: "CursosNiveis",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeEstado = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PaisesId = table.Column<int>(type: "int", nullable: false)
+                    NivelId = table.Column<int>(type: "int", nullable: false),
+                    CursoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Estados", x => x.Id);
+                    table.PrimaryKey("PK_CursosNiveis", x => new { x.NivelId, x.CursoId });
                     table.ForeignKey(
-                        name: "FK_Estados_Paises_PaisesId",
-                        column: x => x.PaisesId,
-                        principalTable: "Paises",
+                        name: "FK_CursosNiveis_Cursos_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Cursos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CursosNiveis_NivelEscolaridade_NivelId",
+                        column: x => x.NivelId,
+                        principalTable: "NivelEscolaridade",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Modulos",
+                name: "MateriasCursos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CursoId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    MateriaId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Modulos", x => x.Id);
+                    table.PrimaryKey("PK_MateriasCursos", x => new { x.MateriaId, x.CursoId });
                     table.ForeignKey(
-                        name: "FK_Modulos_Cursos_CursoId",
+                        name: "FK_MateriasCursos_Cursos_CursoId",
                         column: x => x.CursoId,
                         principalTable: "Cursos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MateriasCursos_Materia_MateriaId",
+                        column: x => x.MateriaId,
+                        principalTable: "Materia",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -233,9 +225,9 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetUserClaims_Usuarios_UserId",
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -253,9 +245,9 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
                     table.ForeignKey(
-                        name: "FK_AspNetUserLogins_Usuarios_UserId",
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -277,9 +269,9 @@ namespace Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_Usuarios_UserId",
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -297,9 +289,9 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
-                        name: "FK_AspNetUserTokens_Usuarios_UserId",
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -320,15 +312,15 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_AvaliacoesCursos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AvaliacoesCursos_Cursos_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Cursos",
+                        name: "FK_AvaliacoesCursos_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AvaliacoesCursos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        name: "FK_AvaliacoesCursos_Cursos_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Cursos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -341,8 +333,6 @@ namespace Infra.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UsuarioId = table.Column<int>(type: "int", nullable: false),
                     DataCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StatusPagamentoId = table.Column<int>(type: "int", nullable: false),
-                    FormaPagamentoId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -350,47 +340,33 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_Compras", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Compras_FormasPagamentos_FormaPagamentoId",
-                        column: x => x.FormaPagamentoId,
-                        principalTable: "FormasPagamentos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Compras_StatusPagamentos_StatusPagamentoId",
-                        column: x => x.StatusPagamentoId,
-                        principalTable: "StatusPagamentos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Compras_Usuarios_UsuarioId",
+                        name: "FK_Compras_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Favoritos",
+                name: "Enderecos",
                 columns: table => new
                 {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    CursoId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favoritos", x => new { x.UsuarioId, x.CursoId });
+                    table.PrimaryKey("PK_Enderecos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Favoritos_Cursos_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Cursos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Favoritos_Usuarios_UsuarioId",
+                        name: "FK_Enderecos_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -406,197 +382,18 @@ namespace Infra.Migrations
                 {
                     table.PrimaryKey("PK_UsuariosCursos", x => new { x.UsuarioId, x.CursoId });
                     table.ForeignKey(
+                        name: "FK_UsuariosCursos_AspNetUsers_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_UsuariosCursos_Cursos_CursoId",
                         column: x => x.CursoId,
                         principalTable: "Cursos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UsuariosCursos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateTable(
-                name: "Cidades",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EstadoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cidades", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Cidades_Estados_EstadoId",
-                        column: x => x.EstadoId,
-                        principalTable: "Estados",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Aulas",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ModuloId = table.Column<int>(type: "int", nullable: false),
-                    CursoId = table.Column<int>(type: "int", nullable: false),
-                    NomeAula = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Conteudo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Aulas", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Aulas_Cursos_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Cursos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Aulas_Modulos_ModuloId",
-                        column: x => x.ModuloId,
-                        principalTable: "Modulos",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UsuariosModulos",
-                columns: table => new
-                {
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    ModuloId = table.Column<int>(type: "int", nullable: false),
-                    NotaMedia = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UsuariosModulos", x => new { x.UsuarioId, x.ModuloId });
-                    table.ForeignKey(
-                        name: "FK_UsuariosModulos_Modulos_ModuloId",
-                        column: x => x.ModuloId,
-                        principalTable: "Modulos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UsuariosModulos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CodigosPostais",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Codigo = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CidadeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CodigosPostais", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CodigosPostais_Cidades_CidadeId",
-                        column: x => x.CidadeId,
-                        principalTable: "Cidades",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Arquivos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomeArquivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MIME = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AulaId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Arquivos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Arquivos_Aulas_AulaId",
-                        column: x => x.AulaId,
-                        principalTable: "Aulas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "NotasAvaliacoes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false),
-                    AulaId = table.Column<int>(type: "int", nullable: false),
-                    Nota = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_NotasAvaliacoes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_NotasAvaliacoes_Aulas_AulaId",
-                        column: x => x.AulaId,
-                        principalTable: "Aulas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_NotasAvaliacoes_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Enderecos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CodigoPostalId = table.Column<int>(type: "int", nullable: false),
-                    UsuarioId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Enderecos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Enderecos_CodigosPostais_CodigoPostalId",
-                        column: x => x.CodigoPostalId,
-                        principalTable: "CodigosPostais",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Enderecos_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Arquivos_AulaId",
-                table: "Arquivos",
-                column: "AulaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -626,14 +423,21 @@ namespace Infra.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aulas_CursoId",
-                table: "Aulas",
-                column: "CursoId");
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aulas_ModuloId",
-                table: "Aulas",
-                column: "ModuloId");
+                name: "IX_AspNetUsers_GeneroId",
+                table: "AspNetUsers",
+                column: "GeneroId");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AvaliacoesCursos_CursoId",
@@ -646,26 +450,6 @@ namespace Infra.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Cidades_EstadoId",
-                table: "Cidades",
-                column: "EstadoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CodigosPostais_CidadeId",
-                table: "CodigosPostais",
-                column: "CidadeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Compras_FormaPagamentoId",
-                table: "Compras",
-                column: "FormaPagamentoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Compras_StatusPagamentoId",
-                table: "Compras",
-                column: "StatusPagamentoId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Compras_UsuarioId",
                 table: "Compras",
                 column: "UsuarioId");
@@ -676,9 +460,9 @@ namespace Infra.Migrations
                 column: "CategoriaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Enderecos_CodigoPostalId",
-                table: "Enderecos",
-                column: "CodigoPostalId");
+                name: "IX_CursosNiveis_CursoId",
+                table: "CursosNiveis",
+                column: "CursoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Enderecos_UsuarioId",
@@ -686,64 +470,19 @@ namespace Infra.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Estados_PaisesId",
-                table: "Estados",
-                column: "PaisesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favoritos_CursoId",
-                table: "Favoritos",
+                name: "IX_MateriasCursos_CursoId",
+                table: "MateriasCursos",
                 column: "CursoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Modulos_CursoId",
-                table: "Modulos",
-                column: "CursoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NotasAvaliacoes_AulaId",
-                table: "NotasAvaliacoes",
-                column: "AulaId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_NotasAvaliacoes_UsuarioId",
-                table: "NotasAvaliacoes",
-                column: "UsuarioId");
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "Usuarios",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Usuarios_GeneroId",
-                table: "Usuarios",
-                column: "GeneroId");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "Usuarios",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsuariosCursos_CursoId",
                 table: "UsuariosCursos",
                 column: "CursoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsuariosModulos_ModuloId",
-                table: "UsuariosModulos",
-                column: "ModuloId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Arquivos");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -766,55 +505,34 @@ namespace Infra.Migrations
                 name: "Compras");
 
             migrationBuilder.DropTable(
+                name: "CursosNiveis");
+
+            migrationBuilder.DropTable(
                 name: "Enderecos");
 
             migrationBuilder.DropTable(
-                name: "Favoritos");
-
-            migrationBuilder.DropTable(
-                name: "NotasAvaliacoes");
+                name: "MateriasCursos");
 
             migrationBuilder.DropTable(
                 name: "UsuariosCursos");
 
             migrationBuilder.DropTable(
-                name: "UsuariosModulos");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "FormasPagamentos");
+                name: "NivelEscolaridade");
 
             migrationBuilder.DropTable(
-                name: "StatusPagamentos");
+                name: "Materia");
 
             migrationBuilder.DropTable(
-                name: "CodigosPostais");
-
-            migrationBuilder.DropTable(
-                name: "Aulas");
-
-            migrationBuilder.DropTable(
-                name: "Usuarios");
-
-            migrationBuilder.DropTable(
-                name: "Cidades");
-
-            migrationBuilder.DropTable(
-                name: "Modulos");
-
-            migrationBuilder.DropTable(
-                name: "Generos");
-
-            migrationBuilder.DropTable(
-                name: "Estados");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cursos");
 
             migrationBuilder.DropTable(
-                name: "Paises");
+                name: "Generos");
 
             migrationBuilder.DropTable(
                 name: "Categorias");
