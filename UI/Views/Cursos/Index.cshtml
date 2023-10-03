@@ -22,27 +22,16 @@
        <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label>Categoria: </label>
-                    <select multiple class="form-control">
-                        <option>Portugês</option>
-                        <option>Matemática</option>
-                        <option>Química</option>
-                        <option>Física</option>
-                        <option>História</option>
+                    <label class="form-label">Categoria</label>
+                    <select class="form-select select2" multiple="multiple" data-placeholder="Selecione uma Categoria" asp-items="@(new SelectList(ViewBag.Categoria, "Id", "NomeCategoria"))">
                     </select>
                 </div>
             </div>
 
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label>Nível: </label>
-                    <select multiple class="form-control">
-                        <option>Ensino Fundamental I</option>
-                        <option>Ensino Fundamental II</option>
-                        <option>Ensino Médio</option>
-                        <option>Pré-Vestibular</option>
-                        <option>Faculdade</option>
-                        <option>Concurso Público</option>
+                    <label class="form-label">Nível</label>
+                    <select class="select2" asp-items="@(new SelectList(ViewBag.Nivel, "Id", "Nome"))">
                     </select>
                 </div>
             </div>
@@ -118,17 +107,26 @@
 
 </section>
 
-<script>
-    const contentDivs = document.querySelectorAll('.card-footer');
-    const maxLength = 590;
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //Initialize Select2 Elements
+            $('.select2').select2()
+        })
 
-    contentDivs.forEach(contentDiv => {
-        const contentText = contentDiv.querySelector('p').textContent;
+        $(document).ready(function () {
+            const maxLength = 590;
 
-        if (contentText.length > maxLength) {
-            const trimmedText = contentText.slice(0, maxLength);
+            $('.card-footer').each(function () {
+                const contentText = $(this).find('p').text();
 
-            contentDiv.querySelector('p').innerText = `${trimmedText} [...]`;
-        }
-    })
+                if (contentText.length > maxLength) {
+                    const trimmedText = contentText.slice(0, maxLength);
+
+                    $(this).find('p').text(`${trimmedText} [...]`);
+                }
+            });
+        });
+
 </script>
+}

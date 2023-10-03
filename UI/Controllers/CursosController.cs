@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,10 +8,20 @@ namespace UI.Controllers
     [Authorize]
     public class CursosController : Controller
     {
-        // GET: CursosController
-        public ActionResult Index()
+        private readonly ICategoriaApp _categoriaApp;
+        private readonly INivelEscolaridadeApp _nivelEscolaridadeApp;
+
+        public CursosController(ICategoriaApp categoriaApp, INivelEscolaridadeApp nivelEscolaridadeApp)
         {
-            return View();
+            _categoriaApp = categoriaApp;
+            _nivelEscolaridadeApp = nivelEscolaridadeApp;
+        }
+        // GET: CursosController
+        public async Task<IActionResult> Index()
+        {
+                ViewBag.Categoria = await _categoriaApp.GetAllAsync();
+                ViewBag.Nivel = await _nivelEscolaridadeApp.GetAllAsync();
+                return View();
         }
 
         [Authorize(Roles = "Aluno")]

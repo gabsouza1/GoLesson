@@ -16,7 +16,10 @@ namespace Application.AutoMapper
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
             CreateMap<Genero, GeneroViewModel>().ReverseMap();
             CreateMap<UsuarioCurso, UsuarioCursoViewModel>().ReverseMap();
-
+            CreateMap<NivelEscolaridade, NivelEscolaridadeViewModel>().ReverseMap();
+            CreateMap<Materia, MateriaViewModel>().ReverseMap();
+            CreateMap<CursosNiveis, CursosNiveisViewModel>().ReverseMap();
+            CreateMap<MateriaCursos, MateriaCursosViewModel>().ReverseMap();
         }
     }
 }

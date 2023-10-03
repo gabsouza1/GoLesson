@@ -8,5 +8,7 @@ namespace Application.ViewModels
 {
     public class NivelEscolaridadeViewModel
     {
+        public int Id { get; set; }
+        public string Nome { get; set; }
     }
 }
