@@ -1,4 +1,5 @@
-﻿using Application.ViewModels;
+﻿using Application.Interfaces;
+using Application.ViewModels;
 using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,16 +11,19 @@ namespace UI.Controllers
     public class UsuarioController : Controller
     {
         private readonly UserManager<Usuario> _userManager;
+        private readonly IGeneroApp _generoApp;
 
-        public UsuarioController(UserManager<Usuario> userManager) 
+        public UsuarioController(UserManager<Usuario> userManager, IGeneroApp generoApp) 
         {
             _userManager = userManager;
+            _generoApp = generoApp;
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult TeacherIndex()
+        public async Task<IActionResult> TeacherIndex()
         {
+            ViewBag.Generos = await _generoApp.GetAllAsync();
             return View();
         }
 

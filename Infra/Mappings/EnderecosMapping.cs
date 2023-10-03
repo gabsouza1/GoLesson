@@ -16,7 +16,6 @@ namespace Infra.Mappings
         {
             builder.ToTable("Enderecos");
             builder.HasKey(p => p.Id);
-            builder.HasOne(es => es.CodigoPostal).WithMany(c => c.Enderecos).HasForeignKey(fk => fk.CodigoPostalId);
 
         }
     }

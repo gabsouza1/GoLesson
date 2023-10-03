@@ -20,11 +20,8 @@ namespace Domain.Entities
         public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Genero? Generos { get; set; }
         public virtual ICollection<UsuarioCurso>? UsuariosCursos { get; set; }
-        public virtual ICollection<UsuarioModulo>? UsuarioModulos { get; set; }
-        public virtual ICollection<Favorito>? Favoritos { get; set; }
         public virtual ICollection<AvaliacaoCurso>? AvaliacoesCursos { get; set;}
         public virtual ICollection<Endereco>? Enderecos { get; set; }
-        public virtual ICollection<NotaAvaliacao>? NotasAvaliacoes { get; set; }
         public virtual ICollection<Compra>? Compras { get; set; }
     }
 }
