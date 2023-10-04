@@ -5,9 +5,9 @@
 <ul class="navbar-nav mb-2 d-flex align-items-center">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li class="nav-item mr-1">
+        <li class="nav-item mr-1 mt-4">
             <form asp-area="Identity" asp-action="Logout" asp-controller="Login" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-dark">Sair</button>
+                <button type="submit" class="nav-link btn btn-link text-white btn-danger">Sair</button>
             </form>
         </li>
     }

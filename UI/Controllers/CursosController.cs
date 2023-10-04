@@ -16,6 +16,7 @@ namespace UI.Controllers
             _categoriaApp = categoriaApp;
             _nivelEscolaridadeApp = nivelEscolaridadeApp;
         }
+        [AllowAnonymous]
         // GET: CursosController
         public async Task<IActionResult> Index()
         {
@@ -31,6 +32,7 @@ namespace UI.Controllers
         }
 
         // GET: CursosController/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             return View();
