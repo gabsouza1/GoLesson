@@ -45,7 +45,9 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                @if (!User.IsInRole("Professor"))
+                { 
+                    <li class="nav-item">
                     <a asp-action="Index" asp-controller="Cursos" class="nav-link">
                         <i class="nav-icon fa fa-solid fa-graduation-cap"></i>
                         <p class="text-dark font-bolder">
@@ -54,17 +56,20 @@
                         </p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a asp-action="MyCourses" asp-controller="Usuario" class="nav-link">
-                        <i class="nav-icon fa fa-solid fa-house-user"></i>
-                        <p class="text-dark">
-                            <strong>Meus Cursos</strong>
-                            <span></span>
-                        </p>
-                    </a>
-                </li>
-
+                }
+                
+                @if (User.IsInRole("Aluno"))
+                {
+                    <li class="nav-item">
+                        <a asp-action="MyCourses" asp-controller="Usuario" class="nav-link">
+                            <i class="nav-icon fa fa-solid fa-house-user"></i>
+                            <p class="text-dark">
+                                <strong>Meus Cursos</strong>
+                                <span></span>
+                            </p>
+                        </a>
+                    </li>
+                }
             </ul>
         </nav>
     </div>

@@ -40,6 +40,7 @@ namespace Application.ViewModels
 
         [Display(Name = "Telefone")]
         [DataType(DataType.PhoneNumber)]
+        [Required(ErrorMessage = "Campo Obrigatório")]
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]

@@ -39,6 +39,7 @@ namespace UI.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateStudent(RegistroViewModel model)
@@ -71,6 +72,7 @@ namespace UI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTeacher(RegistroViewModel model)
         {
             try
@@ -78,7 +80,8 @@ namespace UI.Controllers
                 if (!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Preencha os campos  corretamente");
-                    return View(nameof(Index), model);
+                    ViewBag.Generos = await _generoApp.GetAllAsync();
+                    return View("TeacherIndex", model);
                 }
 
                 var result = await _usuarioApp.AddTeacherAsync(model);
