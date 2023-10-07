@@ -11218,4 +11218,18 @@ textarea.form-control-lg {
   }
 }
 
+.rating {
+    display: flex;
+}
+
+.star {
+    font-size: 2em;
+    cursor: pointer;
+    color: #ccc;
+}
+
+.star.active {
+    color: #ffcc00;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

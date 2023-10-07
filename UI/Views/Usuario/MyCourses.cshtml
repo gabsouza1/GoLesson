@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Titulo"] = "Meus Cursos";
 }
+
+
 <section class="content">
     <div class="container-fluid">
 
@@ -30,7 +32,15 @@
                         <a class="card-title text-success" href="#">Nome Curso</a>
                         <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
                     </div>
-                    <button type="button" class="btn btn-success">Saiba Mais</button>
+
+                    <select class="star-rating">
+                        <option value="">Select a rating</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Average</option>
+                        <option value="2">Poor</option>
+                        <option value="1">Terrible</option>
+                    </select>
                 </div>
             </div>
 
@@ -66,4 +76,7 @@
             contentDiv.querySelector('p').innerText = `${trimmedText} [...]`;
         }
     })
+
+    var stars = new StarRating('.star-rating');
+
 </script>
