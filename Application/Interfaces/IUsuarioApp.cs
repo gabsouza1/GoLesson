@@ -10,6 +10,7 @@ namespace Application.Interfaces
 {
     public interface IUsuarioApp : IApp<UsuarioViewModel, Usuario>
     {
-        Task<Usuario> AddAsync(RegistroViewModel registro);
+        Task<Usuario> AddStudentAsync(RegistroViewModel registro);
+        Task<Usuario> AddTeacherAsync(RegistroViewModel registro);
     }
 }

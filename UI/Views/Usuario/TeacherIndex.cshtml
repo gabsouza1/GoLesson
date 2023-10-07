@@ -1,64 +1,156 @@
-﻿@model Application.ViewModels.UsuarioViewModel;
+﻿@model Application.ViewModels.RegistroViewModel;
 <div class="col-lg-12 row">
-    <div class="col-lg-6">
-        <div class="card">
-            <img src="~/lib/Resources/imagens/teaching.jpg" class="card-img-top" alt="Professor">
-            <div class="card-body">
-                <div class="card-title">
-                    <h1>Alcance seus objetivos</h1>
-                </div>
-                <p class="card-text">Venha para a GoLesson, aqui você poderá divulgar seu trabalho e atrair alunos que almejam por conhecimento</p>
+    <div class="col-lg-6 mb-4">
+        <div class="card position-relative">
+            <img src="~/lib/Resources/imagens/studentdark.jpg" class="card-img-top img-fluid" alt="Aluno">
+            <div class="card-overlay"></div>
+            <div class="card-body d-flex flex-column justify-content-end text-white">
+                <h2 class="card-title">Seja um professor</h2>
+                <p class="card-text">Encontre os melhores professores e comece a aprender hoje mesmo.</p>
             </div>
         </div>
     </div>
     <div class="col-lg-6">
-        <form action="/cadastrar" method="post">
-            <div class="mb-3">
-                <label for="NomeCompleto" class="form-label">Nome Completo:</label>
-                <input type="text" class="form-control" id="NomeCompleto" name="NomeCompleto" required />
+        <div style="min-height: 100vh;">
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <h1 class="login-box-msg"><strong>Seja um Aluno</strong></h1>
+                    <form asp-action="CreateTeacher" asp-controller="Registro" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p>Dados Pessoais</p>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="NomeCompleto" placeholder="Nome Completo">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-user"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="date" class="form-control" asp-for="DataNasc" placeholder="Data de Nascimento">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-calendar-alt"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <select asp-for="Genero" class="form-select" asp-items="@(new SelectList(ViewBag.Generos, "Id", "NomeGenero"))">
+                                        <option value="" selected readonly>Selecione</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-venus-mars"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="tel" class="form-control" asp-for="Telefone" id="telefone">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-phone"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Endereço</p>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="CodigoPostal" id="cep">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-map-marker-alt"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="Logradouro" placeholder="Logradouro" id="rua" readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-street-view"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="Numero" placeholder="Nº">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-hashtag"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="Bairro" id="bairro" placeholder="Bairro" readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-city"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="UF" id="uf" placeholder="Estado" readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-flag"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" asp-for="Cidade" id="cidade" placeholder="Cidade" readonly>
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-city"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Email e Senha</p>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" asp-for="Email" placeholder="Email">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="email" class="form-control" asp-for="ConfirmarEmail" placeholder="Confirmar Email">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" asp-for="Senha" placeholder="Senha">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" asp-for="ConfirmarSenha" placeholder="Confirmar Senha">
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-lock"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success btn-block">Registrar</button>
+                        </div>
+                    </form>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <a asp-action="Index" asp-controller="Login" class="text-center">Já possuo uma conta</a>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="DataNascimento" class="form-label">Data de Nascimento:</label>
-                <input type="date" class="form-control" id="DataNascimento" name="DataNascimento" required />
-            </div>
-            <div class="mb-3">
-                <label for="Genero" class="form-label">Gênero:</label>
-                <select asp-for="Genero" class="form-select" asp-items="@(new SelectList(ViewBag.Generos, "Id", "NomeGenero"))">
-                    <option value="" selected readonly>Selecione seu Gênero</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="Telefone" class="form-label">Telefone: </label>
-                <input type="tel" id="telefone" class="form-control" name="Telefone" required />
-            </div>
-            <div class="mb-3">
-                <label for="cep">CEP:</label>
-                <input type="text" class="form-control" id="cep" name="cep" size="10" maxlength="9" required />
-            </div>
-            <div class="mb-3">
-                <label for="rua">Rua:</label>
-                <input type="text" class="form-control" id="rua" name="rua" size="60" readonly />
-            </div>
-            <div class="mb-3">
-                <label for="bairro">Bairro:</label>
-                <input type="text" class="form-control" id="bairro" name="bairro" size="40" readonly />
-            </div>
-            <div class="mb-3">
-                <label for="cidade">Cidade:</label>
-                <input type="text" class="form-control" id="cidade" name="cidade" size="40" readonly />
-            </div>
-            <div class="mb-3">
-                <label for="uf">Estado:</label>
-                <input type="text" class="form-control" id="uf" name="uf" size="2" readonly />
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-
 
 @section Scripts {
     <script>

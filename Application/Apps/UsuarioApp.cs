@@ -33,7 +33,7 @@ namespace Application.Apps
             _roleManager = roleManager;
         }
 
-        public async Task<Usuario> AddAsync(RegistroViewModel registro)
+        public async Task<Usuario> AddStudentAsync(RegistroViewModel registro)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Application.Apps
                 var result = await _userManager.CreateAsync(usuario, registro.Senha);
                 if(result.Succeeded)
                 {
-                    var roleName = "Administrador";
+                    var roleName = "Aluno";
                     var roleExists = await _roleManager.RoleExistsAsync(roleName);
 
                     if (!roleExists)
@@ -71,11 +71,42 @@ namespace Application.Apps
             }
         }
 
-        public async Task<List<string?>> GetAllRolesAsync()
+        public async Task<Usuario> AddTeacherAsync(RegistroViewModel registro)
         {
-            var roles = await _roleManager.Roles.ToListAsync();
-            return roles.Select(r => r.Name).ToList();
-        }
+            try
+            {
+                Usuario usuario = new()
+                {
+                    NomeCompleto = registro.NomeCompleto,
+                    UserName = registro.Email,
+                    NormalizedUserName = registro.Email.ToUpper(),
+                    Email = registro.Email,
+                    NormalizedEmail = registro.Email.ToUpper(),
+                    CreatedAt = DateTime.UtcNow,
+                    LastUpdatedAt = DateTime.UtcNow,
+                };
+                var result = await _userManager.CreateAsync(usuario, registro.Senha);
+                if (result.Succeeded)
+                {
+                    var roleName = "Professor";
+                    var roleExists = await _roleManager.RoleExistsAsync(roleName);
 
+                    if (!roleExists)
+                    {
+                        var newRole = new IdentityRole<int> { Name = roleName, NormalizedName = roleName.ToUpper() };
+                        await _roleManager.CreateAsync(newRole);
+                    }
+
+                    await _userManager.AddToRoleAsync(usuario, roleName);
+
+                }
+                return usuario;
+
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
