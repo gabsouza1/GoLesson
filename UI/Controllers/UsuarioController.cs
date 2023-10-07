@@ -117,5 +117,13 @@ namespace UI.Controllers
                 return View();
             }
         }
-    }
+        //[Authorize(Roles ="Aluno")]
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> MyCourses()
+        {
+            return View();
+        }
+    } 
+
 }
