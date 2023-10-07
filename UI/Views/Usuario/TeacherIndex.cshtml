@@ -182,31 +182,6 @@
             });
         });
 
-         $(document).ready(function() {
-        $("#senha").on("keyup", function() {
-            var senha = $(this).val();
-
-            // Defina suas regras de validação aqui
-            var regexUpperCase = /[A-Z]/;
-            var regexLowerCase = /[a-z]/;
-            var regexNumbers = /[0-9]/;
-            var regexSpecialChars = /[!#$%^&*()_+{}\[\]:;<>,.?~\\-]/;
-
-            var senhaValida =
-                senha.length >= 8 &&
-                regexUpperCase.test(senha) &&
-                regexLowerCase.test(senha) &&
-                regexNumbers.test(senha) &&
-                regexSpecialChars.test(senha);
-
-            if (senhaValida) {
-                $("#senha-feedback").text("Senha forte").removeClass("text-danger").addClass("text-success");
-            } else {
-                $("#senha-feedback").text("Senha fraca").removeClass("text-success").addClass("text-danger");
-            }
-        });
-    });
-
         $(document).ready(function () {
             function limpa_formulário_cep() {
                 // Limpa valores do formulário de cep.

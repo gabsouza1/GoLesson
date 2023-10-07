@@ -58,7 +58,7 @@
                 </li>
                 }
                 
-                @if (User.IsInRole("Aluno"))
+                @if (User.IsInRole("Aluno") && User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
                         <a asp-action="MyCourses" asp-controller="Usuario" class="nav-link">
