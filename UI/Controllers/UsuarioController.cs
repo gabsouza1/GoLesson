@@ -103,22 +103,26 @@ namespace UI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Profile(string id)
+        public async Task<IActionResult> Profile(int id)
         {
+            
             try
             {
-                var user = await _userManager.FindByIdAsync(id);
-                UsuarioViewModel model = new()
-                {
-                    Id = user.Id,
-                    NomeCompleto = user.NomeCompleto,
-                };
-                return View(model);
+                ViewBag.Generos = await _generoApp.GetAllAsync();
+                var user = await _usuarioApp.GetByIdAsync(id);
+                return View(user);
             }
             catch(Exception ex)
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProfile(UsuarioViewModel usuarioViewModel)
+        {
+            return View();
         }
         //[Authorize(Roles ="Aluno")]
         [AllowAnonymous]
@@ -126,6 +130,13 @@ namespace UI.Controllers
         public async Task<IActionResult> MyCourses()
         {
             return View();
+        }
+
+
+        public string Upload(string fileName)
+        {
+            var folder = "\\wwwroottt\\Resources";
+            return folder; 
         }
     } 
 

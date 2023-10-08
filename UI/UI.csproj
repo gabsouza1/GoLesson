@@ -27,6 +27,7 @@
     <Folder Include="wwwroot\lib\admin-lte\" />
     <Folder Include="wwwroot\lib\Resources\icones\" />
     <Folder Include="wwwroot\lib\Resources\imagens\" />
+    <Folder Include="wwwroot\Resources\" />
   </ItemGroup>
 
   <ItemGroup>
