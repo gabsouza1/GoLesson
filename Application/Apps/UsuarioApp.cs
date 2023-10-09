@@ -6,6 +6,7 @@ using Domain.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +47,13 @@ namespace Application.Apps
                     NormalizedUserName = registro.ConfirmarEmail.ToUpper(),
                     Email = registro.ConfirmarEmail,
                     NormalizedEmail = registro.ConfirmarEmail.ToUpper(),
+                    GeneroId = registro.Genero,
                     DataNasc = registro.DataNasc,
                     PhoneNumber = registro.Telefone,
                     CreatedAt = DateTime.UtcNow,
                     LastUpdatedAt = DateTime.UtcNow,
+                    Ativo = true,
+                    Foto = registro.Foto ?? null
                 };
 
                 var result = await _userManager.CreateAsync(usuario, registro.Senha);
@@ -61,11 +65,12 @@ namespace Application.Apps
                         CodigoPostal = registro.CodigoPostal,
                         Cidade = registro.Cidade,
                         Numero = registro.Numero,
+                        Bairro = registro.Bairro,
                         UF = registro.UF,
                         UsuarioId = usuario.Id
                     };
 
-                    _enderecoRepsitory.Add(endereco);
+                    await _enderecoRepsitory.Add(endereco);
                      var roleName = "Aluno";
                     var roleExists = await _roleManager.RoleExistsAsync(roleName);
 
@@ -94,16 +99,34 @@ namespace Application.Apps
                 Usuario usuario = new()
                 {
                     NomeCompleto = registro.NomeCompleto,
-                    UserName = registro.Email,
-                    NormalizedUserName = registro.Email.ToUpper(),
-                    Email = registro.Email,
-                    NormalizedEmail = registro.Email.ToUpper(),
+                    UserName = registro.ConfirmarEmail,
+                    NormalizedUserName = registro.ConfirmarEmail.ToUpper(),
+                    Email = registro.ConfirmarEmail,
+                    GeneroId = registro.Genero,
+                    NormalizedEmail = registro.ConfirmarEmail.ToUpper(),
+                    DataNasc = registro.DataNasc,
+                    PhoneNumber = registro.Telefone,
                     CreatedAt = DateTime.UtcNow,
                     LastUpdatedAt = DateTime.UtcNow,
+                    Ativo = true,
+                    Foto = registro.Foto ?? null
                 };
+
                 var result = await _userManager.CreateAsync(usuario, registro.Senha);
                 if (result.Succeeded)
                 {
+                    Endereco endereco = new()
+                    {
+                        Logradouro = registro.Logradouro,
+                        CodigoPostal = registro.CodigoPostal,
+                        Cidade = registro.Cidade,
+                        Bairro = registro.Bairro,
+                        Numero = registro.Numero,
+                        UF = registro.UF,
+                        UsuarioId = usuario.Id
+                    };
+
+                    await _enderecoRepsitory.Add(endereco);
                     var roleName = "Professor";
                     var roleExists = await _roleManager.RoleExistsAsync(roleName);
 
@@ -120,6 +143,63 @@ namespace Application.Apps
 
             }
             catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Usuario> EditProfileAsync(UsuarioViewModel usuarioViewModel)
+        {
+            try
+            {
+                var user = await _userManager.FindByIdAsync(usuarioViewModel.Id.ToString());
+                if(user !=  null) 
+                {
+                    user.NomeCompleto = usuarioViewModel.NomeCompleto;
+                    user.GeneroId = usuarioViewModel.Genero;
+                    user.DataNasc = usuarioViewModel.DataNasc;
+                    user.PhoneNumber = usuarioViewModel.Telefone;
+                    user.LastUpdatedAt = DateTime.UtcNow;
+                    user.Ativo = true;
+                }
+                    
+
+
+                if(usuarioViewModel.Email != null)
+                {
+                    user.UserName = usuarioViewModel.ConfirmarEmail;
+                    user.NormalizedEmail = usuarioViewModel.ConfirmarEmail.ToUpper();
+                    user.NormalizedUserName = usuarioViewModel.ConfirmarEmail.ToUpper();
+                    user.Email = usuarioViewModel.ConfirmarEmail;
+                }
+
+                if(usuarioViewModel.Senha != null) 
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var changePassword = await _userManager.ResetPasswordAsync(user, token, usuarioViewModel.ConfirmarSenha);
+
+                }
+
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded) 
+                {
+                    Endereco endereco = new()
+                    {
+                        Logradouro = usuarioViewModel.Logradouro,
+                        CodigoPostal = usuarioViewModel.CodigoPostal,
+                        Cidade = usuarioViewModel.Cidade,
+                        Bairro = usuarioViewModel.Bairro,
+                        Numero = usuarioViewModel.Numero,
+                        UF = usuarioViewModel.UF,
+                        UsuarioId = usuarioViewModel.Id
+                    };
+
+                    await _enderecoRepsitory.Update(endereco);
+
+                }
+                return user;
+            }
+            catch (Exception ex) 
             {
                 return null;
             }

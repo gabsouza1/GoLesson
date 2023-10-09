@@ -12,5 +12,6 @@ namespace Application.Interfaces
     {
         Task<Usuario> AddStudentAsync(RegistroViewModel registro);
         Task<Usuario> AddTeacherAsync(RegistroViewModel registro);
+        Task<Usuario> EditProfileAsync(UsuarioViewModel usuarioViewModel);
     }
 }

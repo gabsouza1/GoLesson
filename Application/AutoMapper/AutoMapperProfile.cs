@@ -9,9 +9,9 @@ namespace Application.AutoMapper
         public AutoMapperProfile()
         {
             CreateMap<Usuario, UsuarioViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.DataNasc, opt => opt.MapFrom(src => src.DataNasc))
                 .ForMember(dest => dest.NomeCompleto, opt => opt.MapFrom(src => src.NomeCompleto))
-                .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Telefone, opt => opt.MapFrom(src => src.PhoneNumber))
                 .ForMember(dest => dest.Genero, opt => opt.MapFrom(src => src.GeneroId))
                 .ForMember(dest => dest.UF, opt => opt.MapFrom(src => src.Enderecos.Where(x => x.UsuarioId == src.Id).Select(x => x.UF).FirstOrDefault()))

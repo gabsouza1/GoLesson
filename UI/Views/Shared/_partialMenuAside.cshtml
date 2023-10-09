@@ -8,14 +8,14 @@
 <aside class="main-sidebar sidebar-dark-success bg-success elevation-4">
     <a asp-action="Index" asp-controller="Home" class="brand-link elevation-4 bg-success d-flex align-items-center">
         <img src="~/lib/Resources/icones/hat.png" alt="GoLesson" class="brand-image img-size-32" width="32px" height="32px" style="opacity: .7">
-        <span class="brand-text font-weight-light ml-2">Go Lesson</span>
+        <span class="brand-text font-weight-light ml-2">GoLesson</span>
     </a>
     <div class="sidebar">
         @if (User.Identity.IsAuthenticated)
         {
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="~/lib/admin-lte/img/user1-128x128.jpg" width="32px" height="32px" class="img-circle" alt="User Image">
+                    <img src="~/Resources/Fotos/@UserManager.FindByEmailAsync(User.Identity.Name).Result.Foto" width="32px" height="32px" class="img-circle" alt="User Image">
                 </div>
                 <div class="info">
                     <a asp-action="Profile" asp-controller="Usuario" asp-route-id="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id" class="d-block text-dark">@UserManager.FindByEmailAsync(User.Identity.Name).Result.NomeCompleto</a>
@@ -70,6 +70,27 @@
                         </a>
                     </li>
                 }
+                @if (User.IsInRole("Professor") && User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item">
+                        <a asp-action="MyCourses" asp-controller="Usuario" class="nav-link">
+                            <i class="nav-icon fa fa-solid fa-house-user"></i>
+                            <p class="text-dark">
+                                <strong>Meu Curso</strong>
+                                <span></span>
+                            </p>
+                        </a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a asp-action="SobreNos" asp-controller="Home" class="nav-link">
+                        <i class="nav-icon fa fa-solid fa-house-user"></i>
+                        <p class="text-dark">
+                            <strong>Sobre Nos</strong>
+                            <span></span>
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

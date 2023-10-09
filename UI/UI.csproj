@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\register.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="7.0.9" />
@@ -27,10 +31,12 @@
     <Folder Include="wwwroot\lib\admin-lte\" />
     <Folder Include="wwwroot\lib\Resources\icones\" />
     <Folder Include="wwwroot\lib\Resources\imagens\" />
-    <Folder Include="wwwroot\Resources\" />
+    <Folder Include="wwwroot\Resources\Fotos\" />
+    <Folder Include="wwwroot\Resources\Capas\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\register.js" />
     <None Include="wwwroot\lib\inputmask\.eslintrc" />
     <None Include="wwwroot\lib\inputmask\.gitattributes" />
     <None Include="wwwroot\lib\inputmask\.github\FUNDING.yml" />

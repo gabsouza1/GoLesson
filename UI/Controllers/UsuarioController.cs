@@ -14,12 +14,15 @@ namespace UI.Controllers
         private readonly UserManager<Usuario> _userManager;
         private readonly IGeneroApp _generoApp;
         private readonly IUsuarioApp _usuarioApp;
+        private readonly SignInManager<Usuario> _signInManager;
 
-        public UsuarioController(UserManager<Usuario> userManager, IGeneroApp generoApp, IUsuarioApp usuarioApp)
+        public UsuarioController(UserManager<Usuario> userManager, IGeneroApp generoApp,
+            IUsuarioApp usuarioApp, SignInManager<Usuario> signInManager)
         {
             _userManager = userManager;
             _generoApp = generoApp;
             _usuarioApp = usuarioApp;
+            _signInManager = signInManager;
         }
 
         [HttpGet]
@@ -42,38 +45,39 @@ namespace UI.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateStudent(RegistroViewModel model)
+        public async Task<IActionResult> CreateStudent(RegistroViewModel model, IFormFile imagem)
         {
             try
             {
                 if (!ModelState.IsValid)
                 {
                     ModelState.AddModelError("", "Preencha os campos  corretamente");
-                    return View(nameof(Index), model);
+                    return View("StudentIndex", model);
                 }
 
                 var result = await _usuarioApp.AddStudentAsync(model);
                 if (result.Id != 0)
                 {
+                    Upload(imagem);
                     ViewData["Sucessso"] = "Usuário criado com sucesso";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     //ViewData["Erro"] = 
                     return View();
                 }
-            }
-            catch
+            } 
+            catch (Exception ex)
             {
-                return View();
+                return View("StudentIndex", model);
             }
         }
 
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateTeacher(RegistroViewModel model)
+        public async Task<IActionResult> CreateTeacher(RegistroViewModel model, IFormFile imagem)
         {
             try
             {
@@ -83,18 +87,24 @@ namespace UI.Controllers
                     ViewBag.Generos = await _generoApp.GetAllAsync();
                     return View("TeacherIndex", model);
                 }
+                if (imagem != null)
+                {
+                    Upload(imagem);
+                    model.Foto = imagem.FileName;
+                }
 
                 var result = await _usuarioApp.AddTeacherAsync(model);
                 if (result.Id != 0)
                 {
                     ViewData["Sucessso"] = "Usuário criado com sucesso";
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     //ViewData["Erro"] = 
-                    return View();
+                    return View("Index", "Home");
                 }
+                return View("", model);
             }
             catch
             {
@@ -105,25 +115,54 @@ namespace UI.Controllers
         [HttpGet]
         public async Task<IActionResult> Profile(int id)
         {
-            
+
             try
             {
                 ViewBag.Generos = await _generoApp.GetAllAsync();
                 var user = await _usuarioApp.GetByIdAsync(id);
+                user.Email = "";
                 return View(user);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return View();
             }
         }
 
         [HttpPost]
+        [Authorize(Roles = "Aluno, Professor")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditProfile(UsuarioViewModel usuarioViewModel)
+        public async Task<IActionResult> EditProfile(UsuarioViewModel usuarioViewModel, IFormFile? imagem)
         {
-            return View();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    ViewBag.Generos = await _generoApp.GetAllAsync();
+                    return View("Profile", usuarioViewModel);
+                }
+
+                if (imagem != null)
+                {
+                    Upload(imagem);
+                    usuarioViewModel.Foto = imagem.FileName;
+                }
+                var result = await _usuarioApp.EditProfileAsync(usuarioViewModel);
+                await _userManager.UpdateSecurityStampAsync(result);
+                await _signInManager.SignOutAsync();
+                await _signInManager.SignInAsync(result, isPersistent: false);
+                return RedirectToAction("Index", "Home");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Não foi possivel editar o usuário");
+                ViewBag.Generos = await _generoApp.GetAllAsync();
+                return View(usuarioViewModel);
+            }
+
         }
+
+
         //[Authorize(Roles ="Aluno")]
         [AllowAnonymous]
         [HttpGet]
@@ -132,12 +171,36 @@ namespace UI.Controllers
             return View();
         }
 
-
-        public string Upload(string fileName)
+        public string Upload(IFormFile file)
         {
-            var folder = "\\wwwroottt\\Resources";
-            return folder; 
+            if (file != null && file.Length > 0)
+            {
+
+                var nomeArquivo = file.FileName;
+
+                // Caminho onde você deseja salvar o arquivo
+                var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Resources\\Fotos", nomeArquivo);
+
+                // Copie o arquivo para o caminho desejado
+                using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                }
+
+                // Realize qualquer ação adicional com o arquivo, se necessário
+
+                return "Inserido";
+            }
+            return "Falha";
         }
-    } 
+
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult VerificarEmailExistente(string email)
+        {
+            bool emailExiste = _userManager.Users.Any(u => u.Email == email);
+            return Json(!emailExiste);
+        }
+    }
 
 }

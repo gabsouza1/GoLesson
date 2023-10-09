@@ -37,7 +37,7 @@ namespace Application.ViewModels
         public string Cidade { get; set; }
 
         public string Bairro { get; set; }
-
+        public string? Foto { get; set; }
         [Display(Name = "Telefone")]
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "Campo Obrigatório")]

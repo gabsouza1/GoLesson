@@ -15,13 +15,11 @@ namespace Application.ViewModels
         [StringLength(256, ErrorMessage = "Máximo de 256 caracteres", MinimumLength = 3)]
         public string NomeCompleto { get; set; }
 
-        [Required(ErrorMessage = "Campo Obrigatório")]
         [EmailAddress(ErrorMessage = "Formato de Email inválido")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Campo Obrigatório")]
         [Compare(nameof(Email), ErrorMessage = "Os endereços de e-mail não correspondem.")]
-        public string ConfirmarEmail { get; set; }
+        public string? ConfirmarEmail { get; set; }
 
         [Required(ErrorMessage = "Campo Obrigatório")]
         public int Genero { get; set; }
@@ -38,6 +36,7 @@ namespace Application.ViewModels
         public string Cidade { get; set; }
 
         public string Bairro { get; set; }
+        public string? Foto {  get; set; }
 
         [Display(Name = "Telefone")]
         [DataType(DataType.PhoneNumber)]
@@ -49,13 +48,10 @@ namespace Application.ViewModels
         [Display(Name = "Data de Nascimento")]
         public DateTime DataNasc { get; set; }
 
-        [Required(ErrorMessage = "Campo Obrigatório")]
         [DataType(DataType.Password)]
-        public string Senha { get; set; }
-
-        [Required(ErrorMessage = "Campo Obrigatório")]
+        public string? Senha { get; set; }
         [DataType(DataType.Password)]
         [Compare(nameof(Senha), ErrorMessage = "As senhas não correspondem")]
-        public string ConfirmarSenha { get; set; }
+        public string? ConfirmarSenha { get; set; }
     }
 }

@@ -13,7 +13,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile">
                         <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                            <img class="profile-user-img img-fluid img-circle" src="~/Resources/Fotos/@Model.Foto" alt="User profile picture">
                         </div>
                         <h3 class="profile-username text-center">@Model.NomeCompleto</h3>
                         <p class="text-muted text-center"></p>
@@ -37,12 +37,13 @@
                     <div class="card">
                         <div class="card-body register-card-body">
                             <h1 class="login-box-msg"><strong>Informações Pessoais</strong></h1>
-                            <form asp-action="CreateTeacher" asp-controller="Usuario" method="post">
+                            <form asp-action="EditProfile" asp-controller="Usuario" method="post" enctype="multipart/form-data">
                                 <div class="row">
+                                    <input asp-for="Id" hidden />
                                     <div class="col-md-6">
                                         <p>Dados Pessoais</p>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" asp-for="NomeCompleto" placeholder="Nome Completo" required>
+                                            <input type="text" class="form-control" asp-for="NomeCompleto" placeholder="Nome Completo">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-user"></span>
@@ -133,7 +134,7 @@
                                     <div class="col-md-6">
                                         <p>Email e Senha</p>
                                         <div class="input-group mb-3">
-                                            <input type="email" class="form-control" asp-for="Email" placeholder="Email" required>
+                                            <input type="email" class="form-control" asp-for="Email" placeholder="Email">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-envelope"></span>
@@ -142,7 +143,7 @@
                                         </div>
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                         <div class="input-group mb-3">
-                                            <input type="email" class="form-control" asp-for="ConfirmarEmail" placeholder="Confirmar Email" required>
+                                            <input type="email" class="form-control" asp-for="ConfirmarEmail" placeholder="Confirmar Email">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-envelope"></span>
@@ -151,7 +152,7 @@
                                         </div>
                                         <span asp-validation-for="ConfirmarEmail" class="text-danger"></span>
                                         <div class="input-group mb-3">
-                                            <input type="password" class="form-control" id="senha" asp-for="Senha" placeholder="Senha" required>
+                                            <input type="password" class="form-control" id="senha" asp-for="Senha" placeholder="Senha">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-lock"></span>
@@ -160,7 +161,7 @@
                                         </div>
                                         <span asp-validation-for="Senha" class="text-danger"></span>
                                         <div class="input-group mb-3">
-                                            <input type="password" class="form-control" asp-for="ConfirmarSenha" placeholder="Confirmar Senha" required>
+                                            <input type="password" class="form-control" asp-for="ConfirmarSenha" placeholder="Confirmar Senha">
                                             <div class="input-group-append">
                                                 <div class="input-group-text">
                                                     <span class="fas fa-lock"></span>
@@ -168,6 +169,15 @@
                                             </div>
                                         </div>
                                         <span asp-validation-for="ConfirmarSenha" class="text-danger"></span>
+                                        <p>Imagem</p>
+                                        <div class="input-group mb-3">
+                                            <input type="file" class="form-control" asp-for="Foto" name="imagem">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-image"></span>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <br />
@@ -178,6 +188,9 @@
 
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
