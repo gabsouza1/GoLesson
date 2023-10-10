@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231010165748_InitialCreate")]
+    [Migration("20231010220732_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -114,6 +114,10 @@ namespace Infra.Migrations
 
                     b.Property<bool>("Acessibilidade")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Capa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");

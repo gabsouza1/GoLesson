@@ -10,6 +10,6 @@ namespace Application.Interfaces
 {
     public interface ICursoApp : IApp<CursoViewModel, Curso>
     {
-
+        Task<List<Curso>> GetCursosByTeacher(int id);
     }
 }

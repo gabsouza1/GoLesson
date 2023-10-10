@@ -39,6 +39,22 @@ namespace UI.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Professor")]
+        public async Task<IActionResult> MeuCurso(int id)
+        {
+            var cursos = await _cursoApp.GetCursosByTeacher(id);
+            if(cursos.Count > 0)
+            {
+                return View(cursos);
+            }
+            else
+            {
+                return View();
+            }
+
+        }
+
         // GET: CursosController/Details/5
         [AllowAnonymous]
         [HttpGet]
@@ -49,15 +65,16 @@ namespace UI.Controllers
         }
 
         [Authorize(Roles = "Professor")]
-        public ActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Categorias = await _categoriaApp.GetAllAsync();
             return View();
         }
 
         [Authorize(Roles = "Professor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(CursoViewModel cursoViewModel)
         {
             try
             {

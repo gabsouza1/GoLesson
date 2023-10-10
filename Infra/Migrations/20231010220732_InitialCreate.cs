@@ -108,6 +108,7 @@ namespace Infra.Migrations
                     NomeCurso = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
+                    Capa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Acessibilidade = table.Column<bool>(type: "bit", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),

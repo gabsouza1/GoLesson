@@ -12,6 +12,7 @@ namespace Domain.Entities
         public string NomeCurso { get; set; }
         public string Descricao { get; set; }
         public int CategoriaId { get; set; }
+        public string Capa { get; set; }
         public decimal Valor { get; set; }
         public bool Acessibilidade { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;

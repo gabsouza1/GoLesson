@@ -112,6 +112,10 @@ namespace Infra.Migrations
                     b.Property<bool>("Acessibilidade")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Capa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CategoriaId")
                         .HasColumnType("int");
 

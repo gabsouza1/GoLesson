@@ -73,7 +73,7 @@
                 @if (User.IsInRole("Professor") && User.Identity.IsAuthenticated)
                 {
                     <li class="nav-item">
-                        <a asp-action="MyCourses" asp-controller="Usuario" class="nav-link">
+                        <a asp-action="MeuCurso" asp-controller="Cursos" asp-route-id="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id" class="nav-link">
                             <i class="nav-icon fa fa-solid fa-house-user"></i>
                             <p class="text-dark">
                                 <strong>Meu Curso</strong>
