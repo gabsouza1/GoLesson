@@ -14,8 +14,6 @@ namespace Domain.Entities
         public int CategoriaId { get; set; }
         public decimal Valor { get; set; }
         public bool Acessibilidade { get; set; }
-
-        public string Nivel { get; set; }
         public DateTime? CreatedAt { get; set; } = DateTime.Now;
         public DateTime? LastUpdatedAt { get; set; } = DateTime.Now;
         public virtual Categoria? Categorias { get; set; }

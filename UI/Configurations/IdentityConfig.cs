@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 using UI.Extensions;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace UI.Configurations
 {
@@ -24,6 +25,13 @@ namespace UI.Configurations
                     .AddEntityFrameworkStores<DataContext>()
                     .AddDefaultTokenProviders()
                     .AddClaimsPrincipalFactory<UserClaimsPrincipalFactory>();
+        //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+        //.AddCookie(options =>
+        //{
+        //    options.LoginPath = "/Login/Index";
+        //    options.AccessDeniedPath = "/Home/Privacy";
+        //});
+
             return services;
         }
     }

@@ -1,114 +1,58 @@
-﻿@{
+﻿@model PagedList.IPagedList<Application.ViewModels.CursoViewModel>
+@{
     ViewData["Titulo"] = "Cursos";
 }
 <section class="content">
     <div class="container-fluid">
-        <div class="col-lg-12 row">
-            <div class="col-md-2">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <div class="navbar-search-block navbar-search-open" style="display: flex;">
-                        <form class="form-inline">
-                            <div class="input-group input-group-sm">
-                                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-navbar" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                    <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-            </div>
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="form-label">Categoria</label>
-                    <select class="form-select" data-placeholder="Selecione uma Categoria" asp-items="@(new SelectList(ViewBag.Categoria, "Id", "NomeCategoria"))">
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label class="form-label">Nível</label>
-                    <select class="form-select" asp-items="@(new SelectList(ViewBag.Nivel, "Id", "Nome"))">
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-md-2">
-                <label class="form-label">Tipo de aula: </label>
-                <select class="form-control">
-                    <option>Ensino à Distância</option>
-                    <option>Presencial</option>
-                </select>
-            </div>
-
-            <div class="col-sm-4">
-                <label class="form-label">Material para pessoa portadora de deficiência: </label>
-                <select class="form-control">
-                    <option>Sim</option>
-                    <option>Não</option>
-                </select>
-            </div>
-       </div>
-
-       <br />
-
         <div class="row">
-
             <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="~/lib/Resources/logo/cursophoto.png" alt="curso" />
-                    </div>
+                @foreach (var item in Model)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="~/lib/Resources/logo/cursophoto.png" style="height: 18.75rem; width: 34.375rem" alt="curso" />
+                        </div>
+                        <div class="card-footer col-sm-12 row">
+                            <div class="col-sm-6">
+                                <h1 class="card-title text-success" href="#">@item.NomeCurso</h1>
+                                <p class="card-text small">@item.Criador</p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="card-text small">R$ @item.Valor</p>
+                            </div>
+                        </div>
 
-                    <div class="card-footer">
-                        <a class="card-title text-success" href="#">Nome Curso</a>
-                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <a asp-route-id="@item.Id" asp-action="Details" asp-controller="Cursos" class="btn btn-success">Saiba Mais</a>
                     </div>
-
-                    <a asp-action="Details" asp-controller="Cursos" class="btn btn-success">Saiba mais</a>
-                </div>
+                }
             </div>
+        </div>
+        <div class="pagination">
+            <ul>
+                @if (Model.PageCount > 1)
+                {
+                    @if (Model.HasPreviousPage)
+                    {
+                        <li><a href="@Url.Action("Index", new { page = 1 })">Primeira</a></li>
+                        <li><a href="@Url.Action("Index", new { page = Model.PageNumber - 1 })">Anterior</a></li>
+                    }
 
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="~/lib/Resources/logo/cursophoto.png" alt="curso" />
-                    </div>
-  
-                    <div class="card-footer">
-                        <a class="card-title text-success" href="#">Nome Curso</a>
-                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    </div>
+                    @for (int i = 1; i <= Model.PageCount; i++)
+                    {
+                        <li class="@(i == Model.PageNumber ? "active" : "")">
+                            <a href="@Url.Action("Index", new { page = i })">@i</a>
+                        </li>
+                    }
 
-                    <a asp-action="Details" asp-controller="Cursos" class="btn btn-success">Saiba mais</a>
-                </div>
-            </div>
-
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <img src="~/lib/Resources/logo/cursophoto.png" alt="curso" />
-                    </div>
-
-                    <div class="card-footer">
-                        <a class="card-title text-success" href="#">Nome Curso</a>
-                        <p class="card-text small">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    </div>
-
-                    <a asp-action="Details" asp-controller="Cursos" class="btn btn-success">Saiba mais</a>
-                </div>
-            </div>
-
+                    @if (Model.HasNextPage)
+                    {
+                        <li><a href="@Url.Action("Index", new { page = Model.PageNumber + 1 })">Próxima</a></li>
+                        <li><a href="@Url.Action("Index", new { page = Model.PageCount })">Última</a></li>
+                    }
+                }
+            </ul>
         </div>
     </div>
-
 </section>
 
 @section Scripts{
@@ -132,5 +76,5 @@
             });
         });
 
-</script>
+    </script>
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Course : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -110,7 +110,6 @@ namespace Infra.Migrations
                     CategoriaId = table.Column<int>(type: "int", nullable: false),
                     Valor = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Acessibilidade = table.Column<bool>(type: "bit", nullable: false),
-                    Nivel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastUpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -356,6 +355,7 @@ namespace Infra.Migrations
                     Logradouro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Numero = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CodigoPostal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Bairro = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UF = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Cidade = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UsuarioId = table.Column<int>(type: "int", nullable: false)

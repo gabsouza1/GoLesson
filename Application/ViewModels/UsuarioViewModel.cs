@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Application.ViewModels
 {
@@ -53,5 +54,7 @@ namespace Application.ViewModels
         [DataType(DataType.Password)]
         [Compare(nameof(Senha), ErrorMessage = "As senhas não correspondem")]
         public string? ConfirmarSenha { get; set; }
+        [NotMapped]
+        public virtual ICollection<UsuarioCursoViewModel>? UsuarioCursos { get; set; }
     }
 }

@@ -125,10 +125,6 @@ namespace Infra.Migrations
                     b.Property<DateTime?>("LastUpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Nivel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("NomeCurso")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

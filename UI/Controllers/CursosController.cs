@@ -1,7 +1,9 @@
 ﻿using Application.Interfaces;
+using Application.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PagedList;
 
 namespace UI.Controllers
 {
@@ -10,19 +12,25 @@ namespace UI.Controllers
     {
         private readonly ICategoriaApp _categoriaApp;
         private readonly INivelEscolaridadeApp _nivelEscolaridadeApp;
+        private readonly ICursoApp _cursoApp;
 
-        public CursosController(ICategoriaApp categoriaApp, INivelEscolaridadeApp nivelEscolaridadeApp)
+        public CursosController(ICategoriaApp categoriaApp, INivelEscolaridadeApp nivelEscolaridadeApp
+            , ICursoApp cursoApp)
         {
             _categoriaApp = categoriaApp;
             _nivelEscolaridadeApp = nivelEscolaridadeApp;
+            _cursoApp = cursoApp;
         }
+
         [AllowAnonymous]
         // GET: CursosController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pagina)
         {
-                ViewBag.Categoria = await _categoriaApp.GetAllAsync();
-                ViewBag.Nivel = await _nivelEscolaridadeApp.GetAllAsync();
-                return View();
+            int numeroPagina = pagina ?? 1;
+            int totalItem = 9;
+            var cursos = await _cursoApp.GetAllAsync();
+            IPagedList<CursoViewModel> cursoPagina = cursos.ToPagedList(numeroPagina, totalItem);
+            return View(cursoPagina);
         }
 
         [Authorize(Roles = "Aluno")]
@@ -33,18 +41,20 @@ namespace UI.Controllers
 
         // GET: CursosController/Details/5
         [AllowAnonymous]
-        public ActionResult Details(int id)
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var curso = await _cursoApp.GetByIdAsync(id);
+            return View(curso);
         }
 
-        // GET: CursosController/Create
+        [Authorize(Roles = "Professor")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CursosController/Create
+        [Authorize(Roles = "Professor")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)

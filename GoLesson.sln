@@ -13,9 +13,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{79EEB6F0-A3D6-4139-A3F6-075938899066}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{8DBF5BC3-3F63-42D4-889E-3C9647EC4F89}"
-	ProjectSection(SolutionItems) = preProject
-		Migrations.txt = Migrations.txt
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra", "Infra\Infra.csproj", "{B348797F-DEED-4D6A-9BD2-E0249D525575}"
 EndProject

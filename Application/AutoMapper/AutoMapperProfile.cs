@@ -23,12 +23,19 @@ namespace Application.AutoMapper
             CreateMap<AvaliacaoCurso, AvaliacaoCursoViewModel>().ReverseMap();
             CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
             CreateMap<Compra, CompraViewModel>().ReverseMap();
-            CreateMap<Curso, CursoViewModel>().ReverseMap();
+            CreateMap<Curso, CursoViewModel>()
+                .ForMember(dest => dest.Categoria, opt => opt.MapFrom(src => src.Categorias))
+                .ForMember(dest => dest.UsuarioCurso, opt => opt.MapFrom(src => src.UsuariosCursos))
+                .ForMember(dest => dest.Materias, opt => opt.MapFrom(src => src.MateriasCursos))
+                .ForMember(dest => dest.Criador, opt => opt.MapFrom(src => src.UsuariosCursos.FirstOrDefault().User.NomeCompleto));
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
             CreateMap<Genero, GeneroViewModel>().ReverseMap();
-            CreateMap<UsuarioCurso, UsuarioCursoViewModel>().ReverseMap();
+            CreateMap<UsuarioCurso, UsuarioCursoViewModel>()
+                .ForMember(dest => dest.Curso, opt => opt.MapFrom(src => src.Cursos))
+                .ForMember(dest => dest.Usuario, opt => opt.MapFrom(src => src.User));
             CreateMap<NivelEscolaridade, NivelEscolaridadeViewModel>().ReverseMap();
-            CreateMap<Materia, MateriaViewModel>().ReverseMap();
+            CreateMap<Materia, MateriaViewModel>()
+                .ForMember(dest => dest.MateriaCursos, opt => opt.MapFrom(src => src.MateriaCursos));
             CreateMap<CursosNiveis, CursosNiveisViewModel>().ReverseMap();
             CreateMap<MateriaCursos, MateriaCursosViewModel>().ReverseMap();
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231008144823_Address")]
-    partial class Address
+    [Migration("20231010165748_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -127,10 +127,6 @@ namespace Infra.Migrations
 
                     b.Property<DateTime?>("LastUpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Nivel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeCurso")
                         .IsRequired()
