@@ -54,7 +54,10 @@ namespace UI.Controllers
                     ModelState.AddModelError("", "Preencha os campos  corretamente");
                     return View("StudentIndex", model);
                 }
-
+                if (imagem != null)
+                {
+                    model.Foto = imagem.FileName;
+                }
                 var result = await _usuarioApp.AddStudentAsync(model);
                 if (result.Id != 0)
                 {
@@ -89,13 +92,13 @@ namespace UI.Controllers
                 }
                 if (imagem != null)
                 {
-                    Upload(imagem);
                     model.Foto = imagem.FileName;
                 }
 
                 var result = await _usuarioApp.AddTeacherAsync(model);
                 if (result.Id != 0)
                 {
+                    Upload(imagem);
                     ViewData["Sucessso"] = "Usuário criado com sucesso";
                     return RedirectToAction("Index", "Home");
                 }

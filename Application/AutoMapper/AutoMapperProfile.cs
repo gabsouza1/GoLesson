@@ -24,9 +24,12 @@ namespace Application.AutoMapper
             CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
             CreateMap<Compra, CompraViewModel>().ReverseMap();
             CreateMap<Curso, CursoViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.NivelId, opt => opt.MapFrom(src => src.CursosNiveis.FirstOrDefault().NivelEscolaridade.Id))
                 .ForMember(dest => dest.Categoria, opt => opt.MapFrom(src => src.Categorias))
                 .ForMember(dest => dest.UsuarioCurso, opt => opt.MapFrom(src => src.UsuariosCursos))
                 .ForMember(dest => dest.Materias, opt => opt.MapFrom(src => src.MateriasCursos))
+                .ForMember(dest => dest.CursosNiveis, opt => opt.MapFrom(src => src.CursosNiveis.FirstOrDefault()))
                 .ForMember(dest => dest.Criador, opt => opt.MapFrom(src => src.UsuariosCursos.FirstOrDefault().User.NomeCompleto));
             CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
             CreateMap<Genero, GeneroViewModel>().ReverseMap();

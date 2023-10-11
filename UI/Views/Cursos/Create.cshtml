@@ -1,39 +1,130 @@
-﻿@model Application.ViewModels.CursoViewModel;
+﻿@using Domain.Entities;
+@using Microsoft.AspNetCore.Identity;
+@model Application.ViewModels.CursoViewModel;
+@inject UserManager<Usuario> UserManager
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-center">Adicionar Curso</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" asp-controller="Cursos" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="NomeCurso"></label>
+                            <input asp-for="NomeCurso" class="form-control" />
+                            <span asp-validation-for="NomeCurso" class="text-danger"></span>
+                        </div>
 
-<form asp-action="Create" asp-controller="Cursos" method="post">
-    <div class="form-group">
-        <label asp-for="NomeCurso"></label>
-        <input asp-for="NomeCurso" class="form-control" />
-        <span asp-validation-for="NomeCurso" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Descricao"></label>
-        <textarea asp-for="Descricao" class="form-control"></textarea>
-        <span asp-validation-for="Descricao" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="CategoriaId"></label>
-        <select asp-for="CategoriaId" asp-items="@(new SelectList(ViewBag.Categorias, "Id", "NomeCategoria"))" class="form-control">
-            <option value="" selected readonly>Escolha a categoria</option>
-        </select>
-        <span asp-validation-for="CategoriaId" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Valor"></label>
-        <input asp-for="Valor" class="form-control" />
-        <span asp-validation-for="Valor" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <div class="form-check">
-            <input asp-for="Acessibilidade" class="form-check-input" />
-            <label asp-for="Acessibilidade" class="form-check-label"></label>
+                        <div class="form-group">
+                            <label asp-for="Descricao"></label>
+                            <textarea asp-for="Descricao" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Descricao" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <hr />
+                        <div class="form-group">
+                            <label asp-for="CategoriaId" class="control-label"></label>
+                            <select asp-for="CategoriaId" asp-items="@(new SelectList(ViewBag.Categorias, "Id", "NomeCategoria"))" class="form-control">
+                                <option value="" selected readonly>Selecione a categoria</option>
+                            </select>
+                            <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="NivelId" class="control-label"></label>
+                            <select asp-for="NivelId" asp-items="@(new SelectList(ViewBag.Nivel, "Id", "Nome"))" class="form-control">
+                                <option value="" selected readonly>Selecione o nivel de escolaridade</option>
+                            </select>
+                            <span asp-validation-for="CategoriaId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-sm-12" style="height: 284px;">
+                                <div class="form-group">
+                                    <label asp-for="Valor"></label>
+                                    <input asp-for="Valor" class="form-control" />
+                                    <span asp-validation-for="Valor" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ArrayDeStrings">Materias</label>
+                                    <div class="input-group">
+                                        <input type="text" id="ArrayDeStrings" name="lista" class="form-control" />
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-primary" id="btnAdicionarString">Adicionar</button>
+                                        </div>
+                                    </div>
+                                    <div class="lista-container" style="max-height: 100px; overflow-y: auto;">
+                                        <ul id="listaDeStrings" class="mt-2"></ul>
+                                    </div>
+                                    <input type="hidden" id="listaHidden" name="lista" />
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-sm-12 mt-3.75">
+                                <div class="form-group mb-3.5">
+                                    <label asp-for="Acessibilidade" class="control-label">Acessibilidade</label>
+                                    <div class="custom-control custom-switch" style="width: 4rem; height: 2rem">
+                                        <input asp-for="Acessibilidade" class="custom-control-input" id="customSwitch" type="checkbox">
+                                        <label class="custom-control-label" for="customSwitch">
+                                            <span id="switchText">Não</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Capa"></label>
+                                    <input asp-for="Capa" type="file" name="capa" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button id="submit" type="submit" class="btn btn-lg btn-primary">Salvar</button>
+                </div>
+                <input hidden asp-for="UsuarioId" value="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id">
+            </form>
         </div>
     </div>
+</div>
 
-    <button type="submit" class="btn btn-primary">Cadastrar</button>
-</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var lista = [];
+
+            $('#btnAdicionarString').click(function () {
+                var novaMateria = $('#ArrayDeStrings').val();
+
+                if (novaMateria) {
+                    lista.push(novaMateria);
+                    $('#listaDeStrings').append('<li>' + novaMateria + '</li');
+                    $('#ArrayDeStrings').val("");
+                    atualizarCampoOculto();
+                }
+            });
+
+            function atualizarCampoOculto() {
+                // Atualize o campo oculto com os valores da lista
+                $('#listaHidden').val(JSON.stringify(lista));
+            }
+            console.log(lista)
+        });
+
+        $(document).ready(function () {
+            $('#customSwitch').change(function () {
+                if (this.checked) {
+                    $('#switchText').text('Sim');
+                } else {
+                    $('#switchText').text('Não');
+                }
+            });
+        });
+    </script>
+}
+
+
+
 

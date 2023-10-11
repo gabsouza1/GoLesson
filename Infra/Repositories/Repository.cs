@@ -19,10 +19,11 @@ namespace Infra.Repositories
             _dataContext = dataContext;
         }
 
-        public async Task Add(T entity)
+        public async Task<T> Add(T entity)
         {
             await _dataContext.Set<T>().AddAsync(entity);
-            await _dataContext.SaveChangesAsync();  
+            await _dataContext.SaveChangesAsync();
+            return entity;
         }
 
         public async Task Delete(T entity)
