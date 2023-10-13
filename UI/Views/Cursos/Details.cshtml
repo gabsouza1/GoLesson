@@ -4,7 +4,10 @@
 @inject UserManager<Usuario> UserManager
 @{
     ViewData["Titulo"] = "Curso";
-    var userId = UserManager.FindByEmailAsync(User.Identity.Name).Result.Id;
+    if (User.Identity.IsAuthenticated)
+    {
+        var userId = UserManager.FindByEmailAsync(User.Identity.Name).Result.Id;
+    }
 }
 <section class="content">
     <div class="card card-solid">
