@@ -19,6 +19,7 @@ namespace Infra.Mappings
             builder.HasMany(c => c.UsuariosCursos).WithOne(uc => uc.Cursos).HasForeignKey(uc => uc.CursoId);
             builder.HasMany(c => c.MateriasCursos).WithOne(mc => mc.Curso).HasForeignKey(mc => mc.CursoId);
             builder.HasMany(c => c.CursosNiveis).WithOne(cn => cn.Curso).HasForeignKey(cn => cn.CursoId);
+            builder.HasMany(c => c.Compras).WithOne(c => c.Curso).HasForeignKey(c => c.CursoId);
         }
     }
 }

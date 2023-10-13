@@ -1,11 +1,16 @@
-﻿@model Application.ViewModels.CursoViewModel
+﻿@using Domain.Entities;
+@using Microsoft.AspNetCore.Identity;
+@model Application.ViewModels.CursoViewModel;
+@inject UserManager<Usuario> UserManager
 @{
     ViewData["Titulo"] = "Curso";
+    var userId = UserManager.FindByEmailAsync(User.Identity.Name).Result.Id;
 }
 <section class="content">
     <div class="card card-solid">
         <div class="card-body">
             <div class="row">
+                <input hidden asp-asp-for="Id" />
                 <div class="col-12 col-sm-6">
                     <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
                     <div class="col-12">
@@ -22,13 +27,30 @@
                         </h2>
                     </div>
                     <div class="mt-4">
-                        <div class="btn btn-success btn-lg btn-flat">
-                            <a href="https://buy.stripe.com/28o9CT8496DZ0CY003" style="text-decoration: none; color: white">
-                                <i class="fas fa-cart-plus fa-lg mr-2"></i>
-                                Comprar
-                            </a>
-
-                        </div>
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <div class="btn btn-success btn-lg btn-flat">
+                                <a asp-action="Index" asp-controller="Login" style="text-decoration: none; color: white">
+                                    <i class="fas fa-user mr-2"></i>
+                                    Fazer Login
+                                </a>
+                            </div>
+                            <div class="btn btn-info btn-lg btn-flat">
+                                <a asp-action="CreateStudent" asp-controller="Registro" style="text-decoration: none; color: white">
+                                    <i class="fas fa-user-plus mr-2"></i>
+                                    Nova Conta
+                                </a>
+                            </div>
+                        }else
+                        {
+                            <form asp-action="BuyCourses" asp-controller="Cursos" asp-route-cursoId="@Model.Id" asp-route-usuarioId="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id">
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-success btn-lg btn-flat">
+                                    Comprar
+                                </button>
+                            </div>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>
@@ -45,5 +67,9 @@
             </div>
 
         </div>
-        </div>
+    </div>
 </section>
+
+@section Scripts {
+
+}

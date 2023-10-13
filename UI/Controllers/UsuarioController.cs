@@ -51,6 +51,7 @@ namespace UI.Controllers
             {
                 if (!ModelState.IsValid)
                 {
+                    ViewBag.Generos = await _generoApp.GetAllAsync();
                     ModelState.AddModelError("", "Preencha os campos  corretamente");
                     return View("StudentIndex", model);
                 }
@@ -164,16 +165,6 @@ namespace UI.Controllers
             }
 
         }
-
-
-        //[Authorize(Roles ="Aluno")]
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<IActionResult> MyCourses()
-        {
-            return View();
-        }
-
         public string Upload(IFormFile file)
         {
             if (file != null && file.Length > 0)

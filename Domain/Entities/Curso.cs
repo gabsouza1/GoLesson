@@ -22,5 +22,6 @@ namespace Domain.Entities
         public virtual ICollection<AvaliacaoCurso>? AvaliacaoCursos { get; set; }
         public virtual ICollection<MateriaCursos>? MateriasCursos { get; set; }
         public virtual ICollection<CursosNiveis>? CursosNiveis { get; set; }
+        public virtual ICollection<Compra>? Compras { get; set; }
     }
 }

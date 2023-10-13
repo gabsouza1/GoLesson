@@ -16,6 +16,7 @@ namespace Infra.Mappings
             builder.ToTable("Compras");
             builder.HasKey(c => c.Id);
             builder.HasOne(c => c.Usuarios).WithMany(u => u.Compras).HasForeignKey(c => c.UsuarioId);
+            builder.HasOne(c => c.Curso).WithMany(c => c.Compras).HasForeignKey(c => c.CursoId);
         }
     }
 

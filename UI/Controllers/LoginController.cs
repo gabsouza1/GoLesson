@@ -34,6 +34,7 @@ namespace UI.Controllers
 
                     if(isAuthenticated.Succeeded) 
                     {
+                        ViewData["Sucesso"] = "Login Efetuado";
                         return RedirectToAction("Index", "Home");
                     }
                     else

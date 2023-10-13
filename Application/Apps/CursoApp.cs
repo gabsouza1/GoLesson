@@ -16,14 +16,18 @@ namespace Application.Apps
     public class CursoApp : App<CursoViewModel, Curso>, ICursoApp
     {
         private readonly ICursoRepository _cursoRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly ICursosNiveisRepository _cursosNiveisRepository;
         private readonly IUsuarioCursoRepository _usuarioCursoRepository;
         private readonly IMateriaCursosRepository _materiaCursosRepository;
+        private readonly ICompraRepository _compraRepository;
         private readonly IMateriaRepository _materiaRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<CursoApp> _logger;
         public CursoApp(ICursoRepository cursoRepository, IMapper mapper
             , ILogger<CursoApp> logger, IUsuarioCursoRepository usuarioCursoRepository, 
-            IMateriaCursosRepository materiaCursosRepository, IMateriaRepository materiaRepository,  ICursosNiveisRepository cursosNiveisRepository) : base(cursoRepository, mapper, logger)
+            IMateriaCursosRepository materiaCursosRepository, IMateriaRepository materiaRepository,  
+            ICursosNiveisRepository cursosNiveisRepository, ICompraRepository compraRepository, IUsuarioRepository usuarioRepository) : base(cursoRepository, mapper, logger)
         {
             _usuarioCursoRepository = usuarioCursoRepository;
             _mapper = mapper;
@@ -31,6 +35,9 @@ namespace Application.Apps
             _materiaRepository = materiaRepository;
             _cursosNiveisRepository = cursosNiveisRepository;
             _cursoRepository = cursoRepository;
+            _compraRepository = compraRepository;
+            _usuarioRepository = usuarioRepository;
+            _logger = logger;
         }
 
         public async Task<Curso> AddCursoAsync(CursoViewModel curso)
@@ -90,12 +97,58 @@ namespace Application.Apps
             
         }
 
+        public async Task<List<CursoViewModel?>> GetCursosByStudent(int id)
+        {
+            try {
+                var comprasUsuarios = await _compraRepository.GetAll();
+                var compraUsuario = comprasUsuarios.Where(cu => cu.UsuarioId == id).Select(cu => cu.Curso).ToList();
+                List<CursoViewModel?> cursos = _mapper.Map<List<CursoViewModel?>>(compraUsuario);
+                return cursos;
+            }catch(Exception ex)
+            {
+                return  new List<CursoViewModel?>();    
+            }
+            
+        }
+
         public async Task<List<CursoViewModel?>> GetCursosByTeacher(int id)
         {
-            var usuarioCursos = await _usuarioCursoRepository.GetAll();
-            var cursoProfessor = usuarioCursos.Where(uc => uc.UsuarioId == id).Select(uc => uc.Cursos).ToList();
-            List<CursoViewModel?> cursos = _mapper.Map<List<CursoViewModel?>>(cursoProfessor);
-            return cursos;
+            try {
+                var usuarioCursos = await _usuarioCursoRepository.GetAll();
+                var cursoProfessor = usuarioCursos.Where(uc => uc.UsuarioId == id).Select(uc => uc.Cursos).ToList();
+                List<CursoViewModel?> cursos = _mapper.Map<List<CursoViewModel?>>(cursoProfessor);
+                return cursos;
+            }catch (Exception ex) 
+            {
+                return new List<CursoViewModel?>();
+            }
+            
+        }
+
+        public async Task<Curso> BuyCourse(int cursoId, int usuarioId)
+        {
+            try
+            {
+                var curso = await _cursoRepository.GetById(cursoId);
+                var usuario = await _usuarioRepository.GetById(usuarioId);
+
+                Compra compra = new()
+                {
+                    CursoId = cursoId,
+                    UsuarioId = usuarioId,
+                    DataCompra = DateTime.Now,
+                    CreatedAt = DateTime.Now,
+                    LastUpdatedAt = DateTime.Now
+                };
+
+                var result = await _compraRepository.Add(compra);
+                return curso;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("", ex.Message);
+                return null;
+            }
         }
     }
 }

@@ -28,13 +28,10 @@ namespace UI.Controllers
 
         [AllowAnonymous]
         // GET: CursosController
-        public async Task<IActionResult> Index(int? pagina)
+        public async Task<IActionResult> Index()
         {
-            int numeroPagina = pagina ?? 1;
-            int totalItem = 9;
             var cursos = await _cursoApp.GetAllAsync();
-            IPagedList<CursoViewModel> cursoPagina = cursos.ToPagedList(numeroPagina, totalItem);
-            return View(cursoPagina);
+            return View(cursos);
         }
 
         [Authorize(Roles = "Aluno")]
@@ -87,25 +84,25 @@ namespace UI.Controllers
                     }
                 }
 
-                if(!ModelState.IsValid) 
+                if (!ModelState.IsValid)
                 {
                     ViewBag.Categorias = await _categoriaApp.GetAllAsync();
                     ViewBag.Nivel = await _nivelEscolaridadeApp.GetAllAsync();
-                    return View("Create",  cursoViewModel);
+                    return View("Create", cursoViewModel);
                 }
                 if (capa != null)
                 {
                     cursoViewModel.Capa = capa.FileName;
                 }
                 var result = await _cursoApp.AddCursoAsync(cursoViewModel);
-                if(result.Id != 0) 
+                if (result.Id != 0)
                 {
                     if (result.Capa != null)
-                    { 
-                        Upload(capa); 
+                    {
+                        Upload(capa);
                     }
                     return RedirectToAction("Index", "Home");
-                    
+
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -185,6 +182,38 @@ namespace UI.Controllers
                 return "Inserido";
             }
             return "Falha";
+        }
+
+        [Authorize(Roles = "Aluno")]
+        [HttpGet]
+        public async Task<IActionResult> MyCourses(int id)
+        {
+            var cursos = await _cursoApp.GetCursosByStudent(id);
+            return View(cursos);
+        }
+
+        [Authorize(Roles = "Aluno")]
+        [HttpPost]
+        public async Task<IActionResult> BuyCourses(int cursoId, int usuarioId)
+        {
+            try
+            {
+                var result = await _cursoApp.BuyCourse(cursoId, usuarioId);
+                if (result.Id != 0)
+                {
+
+                    return RedirectToAction("MyCourses", new RouteValueDictionary { { "id", cursoId }});
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Erro ao efetuar a compra, tente novamente mais tarde");
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(MyCourses(cursoId));
         }
     }
 }
