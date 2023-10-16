@@ -34,6 +34,9 @@ namespace Application.ViewModels
         public string? Criador { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastUpdatedAt { get; set; }
+
+        public bool HasCurso { get; set; }
+
         [NotMapped]
         public virtual ICollection<MateriaCursosViewModel>? MateriasCursos { get; set; }
         public virtual CursosNiveisViewModel? CursosNiveis  { get; set; }

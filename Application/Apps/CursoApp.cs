@@ -8,8 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Application.Apps
 {
@@ -131,6 +134,7 @@ namespace Application.Apps
             {
                 var curso = await _cursoRepository.GetById(cursoId);
                 var usuario = await _usuarioRepository.GetById(usuarioId);
+                var professor = curso.UsuariosCursos?.FirstOrDefault().User;
 
                 Compra compra = new()
                 {
@@ -142,6 +146,30 @@ namespace Application.Apps
                 };
 
                 var result = await _compraRepository.Add(compra);
+
+                var messageProfessor = @"<html>
+                                    <body>  
+                                        <h3>Parabéns, você tem um novo aluno!</h3>
+                                        <br>
+                                        <p>O aluno " + usuario.NomeCompleto + " acabou de adquirir seu curso " + curso.NomeCurso + 
+                                        "<p>Entre em contato com ele pelo número " + usuario.PhoneNumber + " ou pelo Email " + usuario.Email + "</p>" +
+                                    "</body>" +
+                                    "</html>"
+                ;
+
+                var messageAluno = @"<html>
+                                    <body>  
+                                        <h3>Parabéns, você acaba de adiquirir um novo curso!</h3>
+                                        <br>
+                                        <p>Você adiquiriu com sucesso o curso " + curso.NomeCurso + " do professor " + professor.NomeCompleto +
+                                        "<p>Entre em contato com ele pelo número " + professor.PhoneNumber + " ou pelo Email " + professor.Email + "</p>" +
+                                    "</body>" +
+                                    "</html>"
+                ;
+
+                SendEmail(messageProfessor, professor.Email);
+                SendEmail(messageAluno, usuario.Email);
+
                 return curso;
             }
             catch (Exception ex)
@@ -149,6 +177,28 @@ namespace Application.Apps
                 _logger.LogError("", ex.Message);
                 return null;
             }
+        }
+
+        public void SendEmail(string messageContent, string addressMail)
+        {
+            string fromMail = "golesson.inc@gmail.com";
+            string fromPassword = "wzur ujpv llri flvh";
+
+            MailMessage message = new MailMessage();
+            message.From = new MailAddress(fromMail);
+            message.Subject = "Curso adiquirido";
+            message.To.Add(new MailAddress(addressMail));
+            message.Body = messageContent;
+            message.IsBodyHtml = true;
+
+            var smtpClient = new SmtpClient("smtp.gmail.com")
+            {
+                Port = 587,
+                Credentials = new NetworkCredential(fromMail, fromPassword),
+                EnableSsl = true,
+            };
+
+            smtpClient.Send(message);
         }
     }
 }

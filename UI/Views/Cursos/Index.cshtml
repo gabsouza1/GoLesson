@@ -12,7 +12,7 @@
                     <div class="card-body">
                         <h3 class="card-text text-success">@item.NomeCurso</h3>
                         <h5 class="card-text">@item.Criador</h5>
-                        <h5 class="card-text">R$ @item.Valor</h5>
+                        <h5 class="card-text">@string.Format("{0:C}", item.Valor)</h5>
                     </div>
                     <div class="card-footer">
                         <a asp-route-id="@item.Id" asp-action="Details" asp-controller="Cursos" class="btn btn-success">Saiba Mais</a>

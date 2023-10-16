@@ -54,6 +54,10 @@ namespace UI.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var curso = await _cursoApp.GetByIdAsync(id);
+            var user = _userManager.FindByEmailAsync(User.Identity.Name).Result;
+
+            curso.HasCurso = user.Compras.Where(a=> a.CursoId == curso.Id).Count() > 0;
+
             return View(curso);
         }
 
@@ -199,6 +203,7 @@ namespace UI.Controllers
             try
             {
                 var result = await _cursoApp.BuyCourse(cursoId, usuarioId);
+
                 if (result.Id != 0)
                 {
 
@@ -211,7 +216,7 @@ namespace UI.Controllers
             }
             catch (Exception ex)
             {
-
+                ModelState.AddModelError("", "Erro ao efetuar a compra, tente novamente mais tarde");
             }
             return View(MyCourses(cursoId));
         }

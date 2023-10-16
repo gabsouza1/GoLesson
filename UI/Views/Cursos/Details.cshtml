@@ -17,17 +17,17 @@
                 <div class="col-12 col-sm-6">
                     <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
                     <div class="col-12">
-                        <img src="~/lib/Resources/logo/cursophoto.png" class="product-image" alt="Product Image">
+                        <img src="~/Resources/Capas/@Model.Capa" class="product-image" alt="Product Image">
                     </div>
                 </div>
                 <div class="col-12 col-sm-6">
                     <h3 class="my-3">@Model.NomeCurso</h3>
                     <p>@Model.Descricao</p>
                     <hr>
-                    <div class="bg-secondary py-2 px-3 mt-4">
-                        <h2 class="mb-0">
-                            R$ @Model.Valor
-                        </h2>
+                    <div class="text-danger  py-2 px-3 mt-4">
+                        <h3 class="mb-0">
+                            @string.Format("{0:C}", Model.Valor)
+                        </h3>
                     </div>
                     <div class="mt-4">
                         @if (!User.Identity.IsAuthenticated)
@@ -46,13 +46,25 @@
                             </div>
                         }else
                         {
-                            <form asp-action="BuyCourses" asp-controller="Cursos" asp-route-cursoId="@Model.Id" asp-route-usuarioId="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id">
-                            <div class="col-sm-3">
-                                <button type="submit" class="btn btn-success btn-lg btn-flat">
-                                    Comprar
-                                </button>
-                            </div>
-                            </form>
+                            @if (!Model.HasCurso)
+                            {
+                                <form asp-action="BuyCourses" asp-controller="Cursos" asp-route-cursoId="@Model.Id" asp-route-usuarioId="@UserManager.FindByEmailAsync(User.Identity.Name).Result.Id">
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-success btn-lg btn-flat">
+                                        Comprar
+                                    </button>
+                                </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="col-sm-3">
+                                    <button class="btn btn-dark btn-lg btn-flat" disabled>
+                                        Comprado
+                                    </button>
+                                </div>
+                            }
+
                         }
                     </div>
                 </div>
@@ -60,7 +72,7 @@
             <div class="row mt-4">
                 <nav class="w-100">
                     <div class="nav nav-tabs" id="product-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+                        <a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Descrição</a>
 
                     </div>
                 </nav>

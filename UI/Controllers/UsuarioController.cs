@@ -74,7 +74,8 @@ namespace UI.Controllers
             } 
             catch (Exception ex)
             {
-                return View("StudentIndex", model);
+                ModelState.AddModelError("", "Ocorreu um erro no cadastro");
+                return View();
             }
         }
 
@@ -108,7 +109,6 @@ namespace UI.Controllers
                     //ViewData["Erro"] = 
                     return View("Index", "Home");
                 }
-                return View("", model);
             }
             catch
             {

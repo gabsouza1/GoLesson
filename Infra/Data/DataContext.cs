@@ -42,10 +42,10 @@ namespace Infra.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            //string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
-            //optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
-            string conn = "Data Source=localhost;Initial Catalog=GoLesson;Integrated Security=True;TrustServerCertificate=True";
-            optionsBuilder.UseSqlServer(conn);
+            string conn = "server=localhost;port=3306;database=golesson;user=root;password=admin;Connect Timeout=300";
+            optionsBuilder.UseMySql(conn, ServerVersion.AutoDetect(conn));
+            //string conn = "Data Source=localhost;Initial Catalog=GoLesson;Integrated Security=True;TrustServerCertificate=True";
+            //optionsBuilder.UseSqlServer(conn);
             optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.EnableSensitiveDataLogging();
         }
