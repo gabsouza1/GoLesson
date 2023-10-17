@@ -47,7 +47,6 @@ namespace Infra.Data
             //string conn = "Data Source=localhost;Initial Catalog=GoLesson;Integrated Security=True;TrustServerCertificate=True";
             //optionsBuilder.UseSqlServer(conn);
             optionsBuilder.UseLazyLoadingProxies();
-            optionsBuilder.EnableSensitiveDataLogging();
         }
 
     }
