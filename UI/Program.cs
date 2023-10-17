@@ -17,5 +17,6 @@ internal class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
+                webBuilder.UseEnvironment("Production");
             });
 }
